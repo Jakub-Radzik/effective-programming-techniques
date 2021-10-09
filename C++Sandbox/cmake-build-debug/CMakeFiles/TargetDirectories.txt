@@ -1,0 +1,3 @@
+C:/Users/jakub/Desktop/effective-programming-techniques/C++Sandbox/cmake-build-debug/CMakeFiles/C__Sandbox.dir
+C:/Users/jakub/Desktop/effective-programming-techniques/C++Sandbox/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/jakub/Desktop/effective-programming-techniques/C++Sandbox/cmake-build-debug/CMakeFiles/rebuild_cache.dir
