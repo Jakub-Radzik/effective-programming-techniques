@@ -95,18 +95,33 @@ void v_proc_test_5() {
     delete pd_two_dimensional_table;
 }
 
+void v_proc_test_6() {
+    int i_static_int = 5;
+    int *pi_dynamic_copy;
+
+    pi_dynamic_copy = new int(i_static_int);
+    int i_static_copy(i_static_int);
+
+    cout << &i_static_int << " " << pi_dynamic_copy << " " << &i_static_int << endl;
+    cout << i_static_int << " " << *pi_dynamic_copy << " " << i_static_int << endl;
+    i_static_int = 6;
+    cout << i_static_int << " " << *pi_dynamic_copy << " " << i_static_int << endl;
+
+}
+
 int main() {
-//    int *pi_var;
-//    pi_var = new int;
-//    cout << pi_var << endl;
-//    cout << &pi_var << endl;
-//    cout << *pi_var << endl;
-//
-//    v_proc_test();
-//    v_proc_test_2();
-//    v_proc_test_3();
-//    v_proc_test_4();
-//    v_proc_test_5();
+    int *pi_var;
+    pi_var = new int;
+    cout << pi_var << endl;
+    cout << &pi_var << endl;
+    cout << *pi_var << endl;
+
+    v_proc_test();
+    v_proc_test_2();
+    v_proc_test_3();
+    v_proc_test_4();
+    v_proc_test_5();
+    v_proc_test_6();
 
 
     return 0;
