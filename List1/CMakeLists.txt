@@ -3,4 +3,4 @@ project(List1)
 
 set(CMAKE_CXX_STANDARD 98)
 
-add_executable(List1 main.cpp)
+add_executable(List1 main.cpp sources/CTable.cpp sources/CTable.h)

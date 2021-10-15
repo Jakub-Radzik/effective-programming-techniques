@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/jakub/Desktop/effective-programming-techniques/List1/main.cpp
+/home/jakub/Pulpit/Paradygmaty/effective-programming-techniques/List1/main.cpp
 iostream
 -
 string
 -
+sources/CTable.h
+/home/jakub/Pulpit/Paradygmaty/effective-programming-techniques/List1/sources/CTable.h
+
+/home/jakub/Pulpit/Paradygmaty/effective-programming-techniques/List1/sources/CTable.h
 

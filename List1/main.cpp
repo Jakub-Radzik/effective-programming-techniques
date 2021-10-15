@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "sources/CTable.h"
 
 using namespace std;
 
@@ -13,12 +14,13 @@ bool b_is_number_positive(int i_number) {
 void v_alloc_table_add_5(int i_size) {
     if (b_is_number_positive(i_size)) {
 
-        int *pi_table = new int[i_size];
+        int *pi_table;
+        pi_table = new int[i_size];
         for (int i = 0; i < i_size; i++) {
             pi_table[i] = i + i_offset_additional_value;
         }
 
-        for (int i = 0; i < i_size; ++i) {
+        for (int i = 0; i < i_size; i++) {
             cout << pi_table[i] << " ";
         }
 
@@ -92,8 +94,14 @@ int main() {
     }
     cout << " " << endl;
 
+
     // 3:
     b_dealloc_table_2_dim(&pi_table, i_size_x, i_size_y);
+
+    cout << "after" << endl;
+    cout << "after" << endl;
+
+    CTable table;
 
     return 0;
 }
