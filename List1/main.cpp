@@ -1,69 +1,14 @@
 #include <iostream>
-#include <string>
 #include "sources/CTable.h"
+#include "sources/TablesFunctions.h"
 
-using namespace std;
 
-const int i_offset_additional_value = 5;
-
-// 1 :
-bool b_is_number_positive(int i_number) {
-    return i_number > 0;
+void v_mod_tab(CTable *pcTab, int iNewSize) {
+    pcTab->b_set_new_size(iNewSize);
 }
 
-void v_alloc_table_add_5(int i_size) {
-    if (b_is_number_positive(i_size)) {
-
-        int *pi_table;
-        pi_table = new int[i_size];
-        for (int i = 0; i < i_size; i++) {
-            pi_table[i] = i + i_offset_additional_value;
-        }
-
-        for (int i = 0; i < i_size; i++) {
-            cout << pi_table[i] << " ";
-        }
-
-        delete[] pi_table;
-
-    } else {
-        cout << "Number is not greater than 0 !!" << endl;
-    }
-}
-
-// 2 :
-bool b_alloc_table_2_dim(int ***pi_table, int i_size_x, int i_size_y) {
-    if (b_is_number_positive(i_size_x) && b_is_number_positive(i_size_y)) {
-        *pi_table = new int *[i_size_x];
-        for (int i = 0; i < i_size_x; i++) {
-            (*pi_table)[i] = new int[i_size_y];
-        }
-        return true;
-    }
-    return false;
-}
-
-// 3:
-bool b_dealloc_table_2_dim(int ***pi_table, int i_size_x, int i_size_y) {
-    if (b_is_number_positive(i_size_x) && b_is_number_positive(i_size_y)) {
-        for (int i = 0; i < i_size_x; i++) {
-            delete (*pi_table)[i];
-        }
-        delete[] *pi_table;
-        return true;
-    }
-    return false;
-}
-
-bool b_dealloc_table_2_dim(int ***pi_table, int i_size_x) {
-    if (b_is_number_positive(i_size_x)) {
-        for (int i = 0; i < i_size_x; i++) {
-            delete[] pi_table[i];
-        }
-        delete[] *pi_table;
-        return true;
-    }
-    return false;
+void v_mod_tab(CTable cTab, int iNewSize) {
+    cTab.b_set_new_size(iNewSize);
 }
 
 int main() {
@@ -73,37 +18,73 @@ int main() {
     int i_size_y = 3;
 
     // 1:
-    cout << endl << "Execution: v_alloc_table_add_5(i_size);" << endl;
-    v_alloc_table_add_5(i_size);
+    std::cout << std::endl << "Execution: v_alloc_table_add_5(i_size);" << std::endl;
+    TablesFunctions::v_alloc_table_add_5(i_size);
 
     // 2:
-    cout << endl << "Execution: b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y);" << endl;
+    std::cout << std::endl << "Execution: b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y);" << std::endl;
     int **pi_table;
-    b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y);
-    for (int i = 0; i < i_size_x; i++) {
-        for (int j = 0; j < i_size_y; j++) {
-            pi_table[i][j] = i + j;
-        }
-    }
-
-    for (int i = 0; i < i_size_x; i++) {
-        for (int j = 0; j < i_size_y; j++) {
-            cout << "[" << &pi_table[i][j] << " : " << pi_table[i][j] << "] ";
-        }
-        cout << endl;
-    }
-    cout << " " << endl;
-
+    TablesFunctions::b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y);
+    TablesFunctions::v_insert_values_table_2_dim(&pi_table, i_size_x, i_size_y);
+    TablesFunctions::v_print_table_2_dim(&pi_table, i_size_x, i_size_y);
 
     // 3:
-    b_dealloc_table_2_dim(&pi_table, i_size_x, i_size_y);
+    TablesFunctions::b_dealloc_table_2_dim(&pi_table, i_size_x, i_size_y);
 
-    cout << "after" << endl;
-    cout << "after" << endl;
+    // 4:
+    std::cout << std::endl << "KONSTRUKTOR BEZPARAMETROWY" << std::endl;
+    CTable c_table_1;
 
-    CTable table;
+    std::cout << std::endl << "KONSTRUKTOR PARAMETROWY" << std::endl;
+    CTable c_table_2("c_table_2", 5);
+
+    std::cout << std::endl << "KONSTRUKTOR KOPIUJACY" << std::endl;
+    CTable c_table_3(c_table_1);
+    CTable c_table_4(c_table_2);
+
+    std::cout << std::endl << "Print c_table_2: " << std::endl;
+    c_table_2.v_print_array();
+    std::cout << "Set new name: " << std::endl;
+    c_table_2.v_set_name("NOWE");
+    c_table_2.v_print_array();
+    std::cout << "Set new size: " << std::endl;
+    c_table_2.b_set_new_size(3);
+    c_table_2.v_print_array();
+
+    std::cout << std::endl << "KLONOWANIE" << std::endl;
+    CTable c_tab("S", 10);
+
+    CTable *pc_new_tab;
+    pc_new_tab = c_tab.pcClone();
+    pc_new_tab->v_print_array();
+
+    std::cout << std::endl << "TESTOWANIE PROCEDUR" << std::endl;
+    CTable c_tab_5("c_tab_5", 5);
+    c_tab_5.v_print_array();
+
+    std::cout << std::endl << "void v_mod_tab(CTable cTab, 3) " << std::endl;
+    v_mod_tab(c_tab_5, 3);
+    c_tab_5.v_print_array();
+    std::cout << std::endl << "void v_mod_tab(CTable *pcTab, 4) " << std::endl;
+    v_mod_tab(&c_tab_5, 4);
+    c_tab_5.v_print_array();
+
+
+    std::cout << std::endl << "ALOKACJA STATYCZNA" << std::endl;
+    CTable c_static_1;
+    CTable c_static_2("static", 5);
+    CTable c_static_3(c_static_2);
+    std::cout << std::endl << "ALOKACJA DYNAMICZNA" << std::endl;
+    CTable* c_dynamic_1 = new CTable();
+    CTable* c_dynamic_2 = new CTable("dynamic", 5);
+    CTable* c_dynamic_3 = new CTable(*c_dynamic_2);
+
+    std::cout << std::endl << "DESTRUKTORY" << std::endl;
+    delete c_dynamic_1;
+    delete c_dynamic_2;
+    delete c_dynamic_3;
+
 
     return 0;
 }
-
 
