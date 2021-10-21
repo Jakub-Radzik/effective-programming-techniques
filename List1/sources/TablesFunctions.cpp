@@ -44,24 +44,13 @@ bool TablesFunctions::b_alloc_table_2_dim(int ***pi_table, int i_size_x, int i_s
 }
 
 // 3:
-bool TablesFunctions::b_dealloc_table_2_dim(int ***pi_table, int i_size_x, int i_size_y) {
-    if (b_is_number_positive(i_size_x) && b_is_number_positive(i_size_y)) {
-        for (int i = 0; i < i_size_x; i++) {
-            delete (*pi_table)[i];
-        }
-        delete[] *pi_table;
-        return true;
-    }
-    return false;
-}
-
 //Odpowiedź na pytanie: Tak, nie potrzebujemy wszystkich parametrów
-bool TablesFunctions::b_dealloc_table_2_dim(int ***pi_table, int i_size_x) {
+bool TablesFunctions::b_dealloc_table_2_dim(int **pi_table, int i_size_x) {
     if (b_is_number_positive(i_size_x)) {
         for (int i = 0; i < i_size_x; i++) {
-            delete[] pi_table[i];
+            delete pi_table[i];
         }
-        delete[] *pi_table;
+        delete pi_table;
         return true;
     }
     return false;

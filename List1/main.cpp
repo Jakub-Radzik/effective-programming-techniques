@@ -30,9 +30,7 @@ int main() {
     TablesFunctions::v_print_table_2_dim(&pi_table, i_size_x, i_size_y);
 
     // 3:
-    std::cout << "Dealokacja [1- OK]: " << TablesFunctions::b_dealloc_table_2_dim(&pi_table, i_size_x, i_size_y)
-              << std::endl;
-
+    std::cout << "Dealokacja [1- OK]: " << TablesFunctions::b_dealloc_table_2_dim(pi_table, i_size_x) << std::endl;
 
     // 4:
     std::cout << std::endl << "KONSTRUKTOR BEZPARAMETROWY" << std::endl;
