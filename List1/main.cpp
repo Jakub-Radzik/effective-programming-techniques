@@ -2,15 +2,6 @@
 #include "sources/CTable.h"
 #include "sources/TablesFunctions.h"
 
-
-void v_mod_tab(CTable *pcTab, int iNewSize) {
-    pcTab->b_set_new_size(iNewSize);
-}
-
-void v_mod_tab(CTable cTab, int iNewSize) {
-    cTab.b_set_new_size(iNewSize);
-}
-
 int main() {
     //Test data
     int i_size = 10;

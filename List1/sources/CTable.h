@@ -16,7 +16,6 @@ public:
     void v_print_array();
     CTable *pcClone();
 
-
 private:
     static const int i_default_size;
     static const std::string s_default_name;
@@ -25,5 +24,8 @@ private:
     int i_size;
     int *i_array;
 };
+
+void v_mod_tab(CTable *pcTab, int iNewSize);
+void v_mod_tab(CTable cTab, int iNewSize);
 
 #endif //LIST1_CTABLE_H
