@@ -24,12 +24,15 @@ int main() {
     // 2:
     std::cout << std::endl << "Execution: b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y);" << std::endl;
     int **pi_table;
-    TablesFunctions::b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y);
+    std::cout << "Alokacja [1- OK]: " << TablesFunctions::b_alloc_table_2_dim(&pi_table, i_size_x, i_size_y)
+              << std::endl;
     TablesFunctions::v_insert_values_table_2_dim(&pi_table, i_size_x, i_size_y);
     TablesFunctions::v_print_table_2_dim(&pi_table, i_size_x, i_size_y);
 
     // 3:
-    TablesFunctions::b_dealloc_table_2_dim(&pi_table, i_size_x, i_size_y);
+    std::cout << "Dealokacja [1- OK]: " << TablesFunctions::b_dealloc_table_2_dim(&pi_table, i_size_x, i_size_y)
+              << std::endl;
+
 
     // 4:
     std::cout << std::endl << "KONSTRUKTOR BEZPARAMETROWY" << std::endl;
@@ -75,9 +78,9 @@ int main() {
     CTable c_static_2("static", 5);
     CTable c_static_3(c_static_2);
     std::cout << std::endl << "ALOKACJA DYNAMICZNA" << std::endl;
-    CTable* c_dynamic_1 = new CTable();
-    CTable* c_dynamic_2 = new CTable("dynamic", 5);
-    CTable* c_dynamic_3 = new CTable(*c_dynamic_2);
+    CTable *c_dynamic_1 = new CTable();
+    CTable *c_dynamic_2 = new CTable("dynamic", 5);
+    CTable *c_dynamic_3 = new CTable(*c_dynamic_2);
 
     std::cout << std::endl << "DESTRUKTORY" << std::endl;
     delete c_dynamic_1;
