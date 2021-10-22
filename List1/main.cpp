@@ -3,10 +3,21 @@
 #include "sources/TablesFunctions.h"
 
 int main() {
+
     //Test data
     int i_size = 10;
     int i_size_x = 5;
     int i_size_y = 3;
+
+
+    // MODYFIKACJA NA ZAJĘCIACH:
+    int **pi_table_modification;
+    std::cout << "Alokacja [1- OK]: " << TablesFunctions::b_alloc_table_2_dim_modification(&pi_table_modification, i_size_x, i_size_y)
+              << std::endl;
+    TablesFunctions::v_print_table_2_dim(&pi_table_modification, i_size_x, i_size_y);
+    std::cout << "Dealokacja [1- OK]: " << TablesFunctions::b_dealloc_table_2_dim(pi_table_modification, i_size_x) << std::endl;
+
+
 
     // 1:
     std::cout << std::endl << "Execution: v_alloc_table_add_5(i_size);" << std::endl;

@@ -73,3 +73,24 @@ void TablesFunctions::v_print_table_2_dim(int ***pi_table, int i_size_x, int i_s
     }
     std::cout << " " << std::endl;
 }
+
+//modyfikacja
+bool TablesFunctions::b_alloc_table_2_dim_modification(int ** &pi_table, int i_size_x, int i_size_y) {
+    if (b_is_number_positive(i_size_x) && b_is_number_positive(i_size_y)) {
+        *pi_table = new int *[i_size_x];
+        for (int i = 0; i < i_size_x; i++) {
+            *(*pi_table + i) = new int[i_size_y];
+        }
+
+        int **pi_filler = *pi_table;
+
+        for (int i = 0; i < i_size_x; i++) {
+            for (int j = 0; j < i_size_y; j++) {
+                *(*((*pi_table) + i) + j) = i+j;
+            }
+        }
+
+        return true;
+    }
+    return false;
+}

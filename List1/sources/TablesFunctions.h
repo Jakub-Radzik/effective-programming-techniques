@@ -14,6 +14,9 @@ public:
 
     static void v_insert_values_table_2_dim(int ***pi_table, int i_size_x, int i_size_y);
     static void v_print_table_2_dim(int ***pi_table, int i_size_x, int i_size_y);
+
+    //modyfikacja na zajęciach:
+    static bool b_alloc_table_2_dim_modification(int ***pi_table, int i_size_x, int i_size_y);
 private:
     static bool b_is_number_positive(int i_number);
 };

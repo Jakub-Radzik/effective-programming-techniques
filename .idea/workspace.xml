@@ -11,10 +11,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c92df52c-eb6d-4790-b8f8-0b40f6adbd70" name="Default Changelist" comment="ctable">
+    <list default="true" id="c92df52c-eb6d-4790-b8f8-0b40f6adbd70" name="Default Changelist" comment="iteration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/List1/sources/CTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/CTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/List1/sources/CTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/CTable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/List1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/List1/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/List1/sources/TablesFunctions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/TablesFunctions.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/List1/sources/TablesFunctions.h" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/TablesFunctions.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,12 +56,12 @@
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="List1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List1" TARGET_NAME="List1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List1" RUN_TARGET_NAME="List1">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="List1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="List1" TARGET_NAME="List1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="List1" RUN_TARGET_NAME="List1">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -83,6 +84,7 @@
       <workItem from="1633890791435" duration="973000" />
       <workItem from="1633942988350" duration="17000" />
       <workItem from="1634294311383" duration="7080000" />
+      <workItem from="1634903767013" duration="260000" />
     </task>
     <task id="LOCAL-00001" summary="ctable">
       <created>1634299340779</created>
