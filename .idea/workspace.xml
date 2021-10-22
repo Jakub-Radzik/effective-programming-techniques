@@ -11,11 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c92df52c-eb6d-4790-b8f8-0b40f6adbd70" name="Default Changelist" comment="iteration">
+    <list default="true" id="c92df52c-eb6d-4790-b8f8-0b40f6adbd70" name="Default Changelist" comment="lab modification">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/List1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/List1/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/List1/sources/TablesFunctions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/TablesFunctions.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/List1/sources/TablesFunctions.h" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/TablesFunctions.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
       <workItem from="1633890791435" duration="973000" />
       <workItem from="1633942988350" duration="17000" />
       <workItem from="1634294311383" duration="7080000" />
-      <workItem from="1634903767013" duration="260000" />
+      <workItem from="1634903767013" duration="315000" />
     </task>
     <task id="LOCAL-00001" summary="ctable">
       <created>1634299340779</created>
@@ -100,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634299389146</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="lab modification">
+      <created>1634904048691</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1634904048691</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +125,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ctable" />
-    <option name="LAST_COMMIT_MESSAGE" value="ctable" />
+    <MESSAGE value="lab modification" />
+    <option name="LAST_COMMIT_MESSAGE" value="lab modification" />
   </component>
 </project>
