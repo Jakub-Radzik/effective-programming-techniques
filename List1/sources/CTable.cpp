@@ -66,13 +66,43 @@ void CTable::v_print_array() {
     for (int i = 0; i < i_size; i++) {
         std::cout << i_array[i] << ", ";
     }
-    std::cout << "] LENGTH = "<< i_size << std::endl;
+    std::cout << "] LENGTH = " << i_size << std::endl;
 }
 
 CTable *CTable::pcClone() {
     CTable *tab = new CTable(*this);
     return tab;
 }
+
+void CTable::operator=(CTable &pcOther) {
+    i_array = pcOther.i_array;
+    i_size = pcOther.i_size;
+}
+
+CTable CTable::operator+(const CTable &c_tab_1)
+{
+    int i_oldSize = i_size;
+    int i_newSize = i_oldSize + c_tab_1.i_size;
+
+    i_size = i_newSize;
+    int* i_new_array = new int[i_size];
+    for (int i = 0; i < i_oldSize ; ++i)
+        i_new_array[i] = i_array[i];
+
+    delete i_array;
+    i_array = i_new_array;
+
+    // Adding right after the end of the original table
+    for (int i = i_oldSize ; i < i_newSize ; ++i)
+        v_set_value_at(i ,c_tab_1.i_array[i - i_oldSize] );
+
+    return *this;
+}
+
+void CTable::v_set_value_at(int iOffset, int iNewVal) {
+    i_array[iOffset] = iNewVal;
+}
+
 
 void v_mod_tab(CTable *pcTab, int iNewSize) {
     pcTab->b_set_new_size(iNewSize);

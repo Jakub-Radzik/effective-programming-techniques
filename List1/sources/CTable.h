@@ -16,6 +16,10 @@ public:
     void v_print_array();
     CTable *pcClone();
 
+    void operator=(CTable &pcOther);
+    CTable operator+(const CTable &c_tab_1);
+    void v_set_value_at(int iOffset, int iNewVal);
+
 private:
     static const int i_default_size;
     static const std::string s_default_name;
