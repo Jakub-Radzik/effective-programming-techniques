@@ -11,10 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c92df52c-eb6d-4790-b8f8-0b40f6adbd70" name="Default Changelist" comment="lab modification fix">
+    <list default="true" id="c92df52c-eb6d-4790-b8f8-0b40f6adbd70" name="Default Changelist" comment="memcpy + = operators">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/List1/sources/CTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/CTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/List1/sources/CTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/List1/sources/CTable.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,7 @@
       <workItem from="1633942988350" duration="17000" />
       <workItem from="1634294311383" duration="7080000" />
       <workItem from="1634903767013" duration="543000" />
-      <workItem from="1635506391950" duration="1102000" />
+      <workItem from="1635506391950" duration="1798000" />
     </task>
     <task id="LOCAL-00001" summary="ctable">
       <created>1634299340779</created>
@@ -109,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634904105103</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="memcpy + = operators">
+      <created>1635509745478</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1635509745479</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,6 +137,7 @@
     <MESSAGE value="ctable" />
     <MESSAGE value="lab modification" />
     <MESSAGE value="lab modification fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="lab modification fix" />
+    <MESSAGE value="memcpy + = operators" />
+    <option name="LAST_COMMIT_MESSAGE" value="memcpy + = operators" />
   </component>
 </project>

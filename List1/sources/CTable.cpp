@@ -76,20 +76,16 @@ CTable *CTable::pcClone() {
     return tab;
 }
 
-CTable& CTable::operator=(const CTable& a_table)
+CTable& CTable::operator=(const CTable& c_assign_table)
 {
-    std::cout << "operator=" << std::endl;
-    if (this == &a_table)
-    {
-        return *this;
-    }
+    i_size = c_assign_table.i_size;
+    s_name = c_assign_table.s_name;
+
     delete[] i_array;
-    i_size = a_table.i_size;
-    s_name = a_table.s_name;
     i_array = new int[i_size];
 
     for (int i = 0; i < i_size; i++) {
-        i_array[i] = a_table.i_array[i];
+        i_array[i] = c_assign_table.i_array[i];
     }
 
     return *this;
@@ -97,7 +93,7 @@ CTable& CTable::operator=(const CTable& a_table)
 
 CTable CTable::operator+(const CTable& a_other)
 {
-    CTable t('(' + s_name + " + " + a_other.s_name + ')', i_size + a_other.i_size);
+    CTable t("Concat of: " + s_name + " & " + a_other.s_name, i_size + a_other.i_size);
     memcpy(t.i_array, i_array, i_size * sizeof(int));
     memcpy(t.i_array + t.i_size, a_other.i_array, a_other.i_size * sizeof(int));
 
