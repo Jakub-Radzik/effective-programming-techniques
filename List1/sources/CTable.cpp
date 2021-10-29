@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <stdio.h>
+#include <string.h>
 #include "CTable.h"
 
 const int CTable::i_default_size = 100;
@@ -74,29 +76,32 @@ CTable *CTable::pcClone() {
     return tab;
 }
 
-void CTable::operator=(CTable &pcOther) {
-    i_array = pcOther.i_array;
-    i_size = pcOther.i_size;
-}
-
-CTable CTable::operator+(const CTable &c_tab_1)
+CTable& CTable::operator=(const CTable& a_table)
 {
-    int i_oldSize = i_size;
-    int i_newSize = i_oldSize + c_tab_1.i_size;
+    std::cout << "operator=" << std::endl;
+    if (this == &a_table)
+    {
+        return *this;
+    }
+    delete[] i_array;
+    i_size = a_table.i_size;
+    s_name = a_table.s_name;
+    i_array = new int[i_size];
 
-    i_size = i_newSize;
-    int* i_new_array = new int[i_size];
-    for (int i = 0; i < i_oldSize ; ++i)
-        i_new_array[i] = i_array[i];
-
-    delete i_array;
-    i_array = i_new_array;
-
-    // Adding right after the end of the original table
-    for (int i = i_oldSize ; i < i_newSize ; ++i)
-        v_set_value_at(i ,c_tab_1.i_array[i - i_oldSize] );
+    for (int i = 0; i < i_size; i++) {
+        i_array[i] = a_table.i_array[i];
+    }
 
     return *this;
+}
+
+CTable CTable::operator+(const CTable& a_other)
+{
+    CTable t('(' + s_name + " + " + a_other.s_name + ')', i_size + a_other.i_size);
+    memcpy(t.i_array, i_array, i_size * sizeof(int));
+    memcpy(t.i_array + t.i_size, a_other.i_array, a_other.i_size * sizeof(int));
+
+    return t;
 }
 
 void CTable::v_set_value_at(int iOffset, int iNewVal) {
