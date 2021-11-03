@@ -3,8 +3,7 @@
 //
 
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
+#include <cstring>
 #include "CTable.h"
 
 const int CTable::i_default_size = 100;
@@ -76,8 +75,7 @@ CTable *CTable::pcClone() {
     return tab;
 }
 
-CTable& CTable::operator=(const CTable& c_assign_table)
-{
+CTable &CTable::operator=(const CTable &c_assign_table) {
     i_size = c_assign_table.i_size;
     s_name = c_assign_table.s_name;
 
@@ -91,11 +89,10 @@ CTable& CTable::operator=(const CTable& c_assign_table)
     return *this;
 }
 
-CTable CTable::operator+(const CTable& a_other)
-{
-    CTable t("Concat of: " + s_name + " & " + a_other.s_name, i_size + a_other.i_size);
+CTable CTable::operator+(const CTable &c_added_table) {
+    CTable t("Concat of: " + s_name + " & " + c_added_table.s_name, i_size + c_added_table.i_size);
     memcpy(t.i_array, i_array, i_size * sizeof(int));
-    memcpy(t.i_array + t.i_size, a_other.i_array, a_other.i_size * sizeof(int));
+    memcpy(t.i_array + t.i_size, c_added_table.i_array, c_added_table.i_size * sizeof(int));
 
     return t;
 }

@@ -17,7 +17,7 @@ public:
     CTable *pcClone();
 
     CTable& operator=(const CTable& a_table);
-    CTable operator+(const CTable &c_tab_1);
+    CTable operator+(const CTable &c_added_table);
 
     void v_set_value_at(int iOffset, int iNewVal);
 
