@@ -48,19 +48,18 @@ void CTable::v_set_name(std::string sName) {
     s_name = sName;
 }
 
-bool CTable::b_set_new_size(int iTableLen) {
-    if (iTableLen <= 0) {
+bool CTable::b_set_new_size(int i_table_length) {
+    if (i_table_length <= 0) {
         return false;
     }
-    int *i_new_array = new int[iTableLen];
-    for (int i = 0; i < std::min(iTableLen, i_size); i++) {
-        i_new_array[i] = i_array[i];
-    }
-    i_size = iTableLen;
+    int* i_new_array = new int[i_table_length];
+    memcpy(i_new_array, i_array, sizeof(int) * std::min(i_table_length, i_size));
     delete[] i_array;
     i_array = i_new_array;
+    i_size = i_table_length;
     return true;
 }
+
 
 void CTable::v_print_array() {
     std::cout << "{" << s_name << "} " << '[';
