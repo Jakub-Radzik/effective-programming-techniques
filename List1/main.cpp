@@ -88,6 +88,13 @@ int main() {
 //    delete c_dynamic_3;
 
     CTable c_tab_0, c_tab_1;
+    c_tab_0.v_set_name("c_tab_0");
+    c_tab_1.v_set_name("c_tab_1");
+
+    c_tab_0.v_print_array();
+    c_tab_1.v_print_array();
+
+    std::cout << "Set new size:" << std::endl;
     c_tab_0.b_set_new_size(6);
     c_tab_1.b_set_new_size(4);
 
@@ -98,8 +105,6 @@ int main() {
     c_tab_0.v_set_value_at(2, 3);
     c_tab_0.v_set_value_at(3, 4);
 
-
-
     c_tab_1.v_set_value_at(0, 51);
     c_tab_1.v_set_value_at(1, 52);
     c_tab_1.v_set_value_at(2, 53);
@@ -108,22 +113,11 @@ int main() {
     c_tab_0.v_print_array();
     c_tab_1.v_print_array();
     std::cout << "========================" << std::endl;
-//    c_tab_0 = c_tab_1;
-//    c_tab_1.v_set_value_at(2, 123);
-//    c_tab_0.v_print_array();
-//    c_tab_1.v_print_array();
+    std::cout<< "c_tab_0 = (c_tab_1 + c_tab_0);" << std::endl << std::endl;
 
-    std::cout<<"c_tab_0: "<<std::endl;
+    c_tab_0 = (c_tab_1 + c_tab_0);
+
     c_tab_0.v_print_array();
-    std::cout<<"c_tab_1: "<<std::endl;
-    c_tab_1.v_print_array();
-
-    c_tab_1 + c_tab_0;
-    std::cout<<"c_tab_0: "<<std::endl;
-    c_tab_0.v_print_array();
-    std::cout<<"c_tab_1: "<<std::endl;
-    c_tab_1.v_print_array();
-
 
     return 0;
 }

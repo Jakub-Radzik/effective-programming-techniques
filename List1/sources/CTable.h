@@ -10,7 +10,9 @@ public:
     CTable();
     CTable(std::string sName, int iTableLen);
     CTable(CTable &pcOther);
+
     ~CTable();
+
     void v_set_name(std::string sName);
     bool b_set_new_size(int i_table_length);
     void v_print_array();

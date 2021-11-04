@@ -6,9 +6,11 @@
 #include <cstring>
 #include "CTable.h"
 
+//CONSTANTS
 const int CTable::i_default_size = 100;
 const std::string CTable::s_default_name = "DEFAULT";
 
+//CONSTRUCTORS
 CTable::CTable() {
     s_name = s_default_name;
     i_size = i_default_size;
@@ -38,6 +40,7 @@ CTable::CTable(CTable &pcOther) {
     std::cout << "kopiuj: " << s_name << std::endl;
 }
 
+//DESTRUCTOR
 CTable::~CTable() {
     std::cout << "usuwam: " << s_name << std::endl;
 
@@ -60,7 +63,6 @@ bool CTable::b_set_new_size(int i_table_length) {
     return true;
 }
 
-
 void CTable::v_print_array() {
     std::cout << "{" << s_name << "} " << '[';
     for (int i = 0; i < i_size; i++) {
@@ -73,6 +75,8 @@ CTable *CTable::pcClone() {
     CTable *tab = new CTable(*this);
     return tab;
 }
+
+//OPERATORS
 
 CTable &CTable::operator=(const CTable &c_assign_table) {
     i_size = c_assign_table.i_size;
@@ -89,17 +93,16 @@ CTable &CTable::operator=(const CTable &c_assign_table) {
 }
 
 CTable CTable::operator+(const CTable &c_added_table) {
-    CTable t("Concat of: " + s_name + " & " + c_added_table.s_name, i_size + c_added_table.i_size);
-    memcpy(t.i_array, i_array, i_size * sizeof(int));
-    memcpy(t.i_array + t.i_size, c_added_table.i_array, c_added_table.i_size * sizeof(int));
+    CTable c_concat_table("Konkatenacja :" + s_name + "+" + c_added_table.s_name, i_size + c_added_table.i_size);
+    memcpy(c_concat_table.i_array, i_array, i_size * sizeof(int));
+    memcpy(c_concat_table.i_array + i_size, c_added_table.i_array, c_added_table.i_size * sizeof(int));
 
-    return t;
+    return c_concat_table;
 }
 
 void CTable::v_set_value_at(int iOffset, int iNewVal) {
     i_array[iOffset] = iNewVal;
 }
-
 
 void v_mod_tab(CTable *pcTab, int iNewSize) {
     pcTab->b_set_new_size(iNewSize);
