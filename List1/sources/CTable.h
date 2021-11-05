@@ -20,6 +20,7 @@ public:
 
     CTable& operator=(const CTable& a_table);
     CTable operator+(const CTable &c_added_table);
+    void operator/(int i_divider);
 
     void v_set_value_at(int iOffset, int iNewVal);
 

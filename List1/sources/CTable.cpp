@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <math.h>
 #include "CTable.h"
 
 //CONSTANTS
@@ -55,7 +56,7 @@ bool CTable::b_set_new_size(int i_table_length) {
     if (i_table_length <= 0) {
         return false;
     }
-    int* i_new_array = new int[i_table_length];
+    int *i_new_array = new int[i_table_length];
     memcpy(i_new_array, i_array, sizeof(int) * std::min(i_table_length, i_size));
     delete[] i_array;
     i_array = i_new_array;
@@ -98,6 +99,27 @@ CTable CTable::operator+(const CTable &c_added_table) {
     memcpy(c_concat_table.i_array + i_size, c_added_table.i_array, c_added_table.i_size * sizeof(int));
 
     return c_concat_table;
+}
+
+void CTable::operator/(int i_divider) {
+    if (i_divider > 0) {
+        int i_new_size = int(ceil(this->i_size - (this->i_size / i_divider)));
+
+        int *i_new_array = new int[i_new_size];
+        int i_actual_position_to_append = 0;
+
+        for (int i = 0; i < i_size; i++) {
+            if (i % i_divider != 0) {
+                i_new_array[i_actual_position_to_append++] = this->i_array[i];
+            }
+        }
+
+        delete[] this->i_array;
+        this->i_array = i_new_array;
+        this->i_size = i_new_size;
+    } else {
+        throw "Wrong divisor";
+    }
 }
 
 void CTable::v_set_value_at(int iOffset, int iNewVal) {
