@@ -6,11 +6,16 @@
 #define LIST3_CNODESTATIC_H
 
 
+#include <vector>
+
 class CNodeStatic {
 public:
-    CNodeStatic();
+    CNodeStatic() {
+        i_val = 0;
+        pc_parent_node = nullptr;
+    }
 
-    ~CNodeStatic();
+    ~CNodeStatic(){};
 
     void vSetValue(int iNewVal);
 
@@ -20,15 +25,16 @@ public:
 
     CNodeStatic *pcGetChild(int iChildOffset);
 
-    void vPrint();
-
     void vPrintAllBelow();
+    void vPrintUp();
 
 private:
-    vector <CNodeStatic> v_children;
+    std::vector<CNodeStatic> v_children;
     CNodeStatic *pc_parent_node;
     int i_val;
-}//class CNodeStatic
+}
+
+//class CNodeStatic
 
 
 #endif //LIST3_CNODESTATIC_H

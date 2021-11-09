@@ -2,16 +2,11 @@
 // Created by Jakub Radzik on 09/11/2021.
 //
 
+#include <iostream>
 #include "CNodeStatic.h"
 
-CNodeStatic::CNodeStatic() {
-    i_val = 0;
-    pc_parent_node = NULL;
-}
 
-CNodeStatic::~CNodeStatic() {
-
-}
+CNodeStatic::~CNodeStatic() {}
 
 void CNodeStatic::vSetValue(int iNewVal) {
     i_val = iNewVal;
@@ -22,17 +17,32 @@ int CNodeStatic::iGetChildrenNumber() {
 }
 
 void CNodeStatic::vAddNewChild() {
-
+    CNodeStatic toAdd = CNodeStatic();
+    toAdd.pc_parent_node = this;
+    v_children.push_back(toAdd);
 }
 
-CNodeStatic CNodeStatic::pcGetChild(int iChildOffset) {
+CNodeStatic *CNodeStatic::pcGetChild(int iChildOffset) {
+    if ((iChildOffset < 0) || (iChildOffset >= v_children.size())) {
+        return nullptr;
+    }
 
-}
-
-void CNodeStatic::vPrint() {
-    cout << " " << i_val;
+    return &v_children[iChildOffset];
 }
 
 void CNodeStatic::vPrintAllBelow() {
+    std::cout << " " << i_val;
+
+    for (int i = 0; i < v_children.size(); i++)
+        this->pcGetChild(i)->vPrintAllBelow();
 
 }
+
+void CNodeStatic::vPrintUp() {
+    std::cout << " " << i_val;
+
+    if (pc_parent_node != nullptr)
+        pc_parent_node->vPrintUp();
+}
+
+
