@@ -1,6 +1,8 @@
 #include <iostream>
+#include "sources/CNodeStatic/CNodeStatic.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    v_tree_test();
+
     return 0;
 }
