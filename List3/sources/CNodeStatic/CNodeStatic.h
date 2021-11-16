@@ -5,7 +5,7 @@
 #ifndef LIST3_CNODESTATIC_H
 #define LIST3_CNODESTATIC_H
 
-
+#include <iostream>
 #include <vector>
 
 class CNodeStatic {
