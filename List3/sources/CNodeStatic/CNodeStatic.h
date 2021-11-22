@@ -29,6 +29,9 @@ public:
     void vPrintAllBelow();
     void vPrintUp();
 
+    CNodeStatic *getPcParentNode() const;
+    void setPcParentNode(CNodeStatic *pcParentNode);
+
 private:
     std::vector<CNodeStatic> v_children;
     CNodeStatic *pc_parent_node;

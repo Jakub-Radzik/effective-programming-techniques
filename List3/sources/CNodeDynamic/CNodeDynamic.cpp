@@ -30,7 +30,13 @@ int CNodeDynamic::iGetChildrenNumber() { return v_children.size(); }
 void CNodeDynamic::vAddNewChild() {
     CNodeDynamic *newNode;
     newNode = new CNodeDynamic();
+    newNode->setPcParentNode(this);
     v_children.push_back(newNode);
+    newNode = nullptr;
+}
+
+void CNodeDynamic::vAddNewChild(CNodeDynamic *c_node_to_append) {
+    v_children.push_back(c_node_to_append);
 }
 
 CNodeDynamic *CNodeDynamic::pcGetChild(int iChildOffset) {
@@ -48,4 +54,25 @@ void CNodeDynamic::vPrintAllBelow() {
         v_children[i]->vPrintAllBelow();
     }
 }
+
+CNodeDynamic *CNodeDynamic::getPcParentNode() {
+    return pc_parent_node;
+}
+
+void CNodeDynamic::setPcParentNode(CNodeDynamic *pcParentNode) {
+    pc_parent_node = pcParentNode;
+}
+
+void CNodeDynamic::removeChild(CNodeDynamic *oldChild) {
+    for (int i = 0; i < iGetChildrenNumber(); i++) {
+        if ((*v_children[i]).i_val == oldChild->i_val) {
+            v_children.erase(v_children.begin() + i);
+        }
+    }
+}
+
+int CNodeDynamic::getIVal() const {
+    return i_val;
+}
+
 

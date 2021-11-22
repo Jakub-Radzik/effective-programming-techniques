@@ -7,7 +7,6 @@
 
 
 CNodeStatic::~CNodeStatic() {
-//    std::cout << "deleted node: " << i_val << std::endl;
 }
 
 void CNodeStatic::vSetValue(int iNewVal) {
@@ -45,6 +44,14 @@ void CNodeStatic::vPrintUp() {
 
     if (pc_parent_node != nullptr)
         pc_parent_node->vPrintUp();
+}
+
+CNodeStatic *CNodeStatic::getPcParentNode() const {
+    return pc_parent_node;
+}
+
+void CNodeStatic::setPcParentNode(CNodeStatic *pcParentNode) {
+    pc_parent_node = pcParentNode;
 }
 
 void v_tree_test() {
