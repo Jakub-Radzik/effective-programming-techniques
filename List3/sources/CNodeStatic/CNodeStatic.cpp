@@ -24,11 +24,6 @@ void CNodeStatic::vAddNewChild() {
     v_children.push_back(c_node_to_add);
 }
 
-void CNodeStatic::vAddNewChild(CNodeStatic pStatic) {
-    pStatic.pc_parent_node = this;
-    v_children.push_back(pStatic);
-}
-
 CNodeStatic *CNodeStatic::pcGetChild(int i_child_offset) {
     if ((i_child_offset < 0) || (i_child_offset >= v_children.size())) {
         return nullptr;
@@ -52,6 +47,7 @@ void CNodeStatic::vPrintUp() {
         pc_parent_node->vPrintUp();
 }
 
+
 CNodeStatic *CNodeStatic::getPcParentNode() const {
     return pc_parent_node;
 }
@@ -66,6 +62,10 @@ void CNodeStatic::removeChild(CNodeStatic *oldChild) {
             v_children.erase(v_children.begin() + i);
         }
     }
+}
+
+int CNodeStatic::getIVal() const {
+    return i_val;
 }
 
 void v_tree_test() {

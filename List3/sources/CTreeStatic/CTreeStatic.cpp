@@ -16,17 +16,39 @@ CTreeStatic::~CTreeStatic() {
 void CTreeStatic::vPrintTree() {
     c_root.vPrintAllBelow();
 }
-
+//TODO: repair that
 bool bMoveSubtree(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode) {
     if (!pcParentNode || !pcNewChildNode) {
         return false;
     }
+
+    //Old parent lost child
     pcNewChildNode->getPcParentNode()->removeChild(pcNewChildNode);
-    pcParentNode->vAddNewChild(*pcNewChildNode);
+
+    //New parent get new child
+    pcParentNode->vAddNewChild();
+    pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1)->vSetValue(pcNewChildNode->getIVal());
+
+    //Child get new parent
     pcNewChildNode->setPcParentNode(pcParentNode);
+
+    if (pcNewChildNode->iGetChildrenNumber() > 0) {
+        for (int i = 0; i < pcNewChildNode->iGetChildrenNumber(); i++) {
+            bMoveSubtree(pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1),
+                         pcNewChildNode->pcGetChild(i));
+        }
+    }
+
 
     return true;
 }
+
+//IDK
+void c_copy_tree_recursive(CNodeStatic *c_destination, CNodeStatic *c_source) {
+
+
+}
+
 
 void v_static_test_1() {
     CTreeStatic c_tree_1;
