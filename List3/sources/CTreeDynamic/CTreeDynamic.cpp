@@ -12,7 +12,7 @@ CTreeDynamic::CTreeDynamic() {
 }
 
 CTreeDynamic::~CTreeDynamic() {
-    std::cout << "END" << std::endl;
+    std::cout << "DELETE TREE" << std::endl;
     delete pc_root;
 }
 
@@ -36,6 +36,7 @@ bool bMoveSubtree(CNodeDynamic *pcParentNode, CNodeDynamic *pcNewChildNode) {
 }
 
 void v_dynamic_test_1() {
+    std::cout << "Dynamic Tree Test" << std::endl;
     CTreeDynamic *c_tree_1;
     c_tree_1 = new CTreeDynamic();
 
@@ -43,38 +44,39 @@ void v_dynamic_test_1() {
     c_tree_2 = new CTreeDynamic();
 
     c_tree_1->pcGetRoot()->vSetValue(1);
-    c_tree_2->pcGetRoot()->vSetValue(10);
+    c_tree_2->pcGetRoot()->vSetValue(2);
 
     c_tree_1->pcGetRoot()->vAddNewChild();
     c_tree_1->pcGetRoot()->vAddNewChild();
-    c_tree_1->pcGetRoot()->pcGetChild(0)->vSetValue(2);
-    c_tree_1->pcGetRoot()->pcGetChild(1)->vSetValue(3);
+    c_tree_1->pcGetRoot()->pcGetChild(0)->vSetValue(3);
+    c_tree_1->pcGetRoot()->pcGetChild(1)->vSetValue(4);
 
     c_tree_2->pcGetRoot()->vAddNewChild();
     c_tree_2->pcGetRoot()->vAddNewChild();
-    c_tree_2->pcGetRoot()->pcGetChild(0)->vSetValue(20);
-    c_tree_2->pcGetRoot()->pcGetChild(1)->vSetValue(30);
+    c_tree_2->pcGetRoot()->pcGetChild(0)->vSetValue(5);
+    c_tree_2->pcGetRoot()->pcGetChild(1)->vSetValue(6);
 
     c_tree_2->pcGetRoot()->pcGetChild(1)->vAddNewChild();
-    c_tree_2->pcGetRoot()->pcGetChild(1)->pcGetChild(0)->vSetValue(40);
+    c_tree_2->pcGetRoot()->pcGetChild(1)->pcGetChild(0)->vSetValue(7);
     c_tree_2->pcGetRoot()->pcGetChild(1)->pcGetChild(0)->setPcParentNode(c_tree_2->pcGetRoot()->pcGetChild(1));
 
 
+    std::cout << "c_tree_1 before move:" << std::endl;
     c_tree_1->vPrintTree();
-    std::cout << std::endl;
+    std::cout << std::endl << "c_tree_2 before move:" << std::endl;
     c_tree_2->vPrintTree();
-    std::cout << std::endl;
 
     bMoveSubtree(c_tree_1->pcGetRoot()->pcGetChild(1), c_tree_2->pcGetRoot()->pcGetChild(1));
 
+    std::cout << std::endl << "c_tree_1 after move:" << std::endl;
     c_tree_1->vPrintTree();
-    std::cout << std::endl;
+    std::cout << std::endl << "c_tree_2 after move:" << std::endl;
     c_tree_2->vPrintTree();
     std::cout << std::endl;
 
 
-    delete [] c_tree_1;
-    delete [] c_tree_2;
+    delete c_tree_1;
+    delete c_tree_2;
 }
 
 void v_test_dynamic_tree() {
@@ -138,9 +140,5 @@ void v_test_dynamic_tree() {
     std::cout << "c_tree_2 after move:" << std::endl;
     c_tree_2->vPrintTree();
     std::cout << std::endl;
-
-    delete c_tree_1;
-    delete c_tree_2;
-
 
 }

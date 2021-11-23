@@ -22,5 +22,9 @@ private:
     CNodeStatic c_root;
 };
 
+bool bMoveSubtree(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode);
+
+void v_static_test_1();
+
 
 #endif //LIST3_CTREESTATIC_H

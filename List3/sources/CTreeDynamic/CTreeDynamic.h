@@ -24,7 +24,6 @@ private:
 
 bool bMoveSubtree(CNodeDynamic *pcParentNode, CNodeDynamic *pcNewChildNode);
 
-void v_test_dynamic_tree();
 void v_dynamic_test_1();
 
 

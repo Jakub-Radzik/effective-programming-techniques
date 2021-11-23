@@ -23,11 +23,15 @@ public:
 
     void vAddNewChild();
 
+    void vAddNewChild(CNodeStatic pStatic);
+
     CNodeStatic *pcGetChild(int i_child_offset);
 
     void vPrint() {std::cout << " " << i_val;};
     void vPrintAllBelow();
     void vPrintUp();
+
+    void removeChild(CNodeStatic *oldChild);
 
     CNodeStatic *getPcParentNode() const;
     void setPcParentNode(CNodeStatic *pcParentNode);
@@ -36,6 +40,7 @@ private:
     std::vector<CNodeStatic> v_children;
     CNodeStatic *pc_parent_node;
     int i_val;
+
 };
 
 void v_tree_test();
