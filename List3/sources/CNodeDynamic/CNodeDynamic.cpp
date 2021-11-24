@@ -11,7 +11,6 @@ CNodeDynamic::CNodeDynamic() {
 }
 
 CNodeDynamic::~CNodeDynamic() {
-//    std::cout << "deleted node: " << this->i_val << std::endl;
     if (iGetChildrenNumber() == 0) {
         return;
     } else {

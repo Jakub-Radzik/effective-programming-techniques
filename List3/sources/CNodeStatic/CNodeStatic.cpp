@@ -7,7 +7,6 @@
 
 
 CNodeStatic::~CNodeStatic() {
-//    std::cout << "Delete node " << this->i_val << std::endl;
 }
 
 void CNodeStatic::vSetValue(int iNewVal) {

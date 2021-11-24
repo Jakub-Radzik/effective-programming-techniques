@@ -12,7 +12,6 @@ CTreeDynamic::CTreeDynamic() {
 }
 
 CTreeDynamic::~CTreeDynamic() {
-//    std::cout << "DELETE TREE" << std::endl;
     delete pc_root;
 }
 

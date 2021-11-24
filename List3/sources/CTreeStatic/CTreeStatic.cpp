@@ -5,12 +5,10 @@
 #include "CTreeStatic.h"
 
 CTreeStatic::CTreeStatic() {
-//    std::cout << "Create static: " << std::endl;
     c_root = CNodeStatic();
 }
 
 CTreeStatic::~CTreeStatic() {
-//    std::cout << "Delete static: " << std::endl;
 }
 
 void CTreeStatic::vPrintTree() {
