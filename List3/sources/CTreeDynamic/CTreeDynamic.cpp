@@ -12,7 +12,7 @@ CTreeDynamic::CTreeDynamic() {
 }
 
 CTreeDynamic::~CTreeDynamic() {
-    std::cout << "DELETE TREE" << std::endl;
+//    std::cout << "DELETE TREE" << std::endl;
     delete pc_root;
 }
 
@@ -29,7 +29,9 @@ bool bMoveSubtree(CNodeDynamic *pcParentNode, CNodeDynamic *pcNewChildNode) {
     }
 
     pcParentNode->vAddNewChild(pcNewChildNode);
-    pcNewChildNode->getPcParentNode()->removeChild(pcNewChildNode);
+    if (pcNewChildNode->getPcParentNode()) {
+        pcNewChildNode->getPcParentNode()->removeChild(pcNewChildNode);
+    }
     pcNewChildNode->setPcParentNode(pcParentNode);
 
     return true;

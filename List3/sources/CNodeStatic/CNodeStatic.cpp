@@ -56,16 +56,20 @@ void CNodeStatic::setPcParentNode(CNodeStatic *pcParentNode) {
     pc_parent_node = pcParentNode;
 }
 
+int CNodeStatic::getIVal() const {
+    return i_val;
+}
+
 void CNodeStatic::removeChild(CNodeStatic *oldChild) {
     for (int i = 0; i < iGetChildrenNumber(); i++) {
-        if (v_children[i].i_val == oldChild->i_val) {
+        if (&v_children[i] == oldChild) {
             v_children.erase(v_children.begin() + i);
         }
     }
 }
 
-int CNodeStatic::getIVal() const {
-    return i_val;
+void CNodeStatic::removeAllChildren() {
+    v_children.clear();
 }
 
 void v_tree_test() {

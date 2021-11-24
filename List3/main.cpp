@@ -5,7 +5,7 @@
 
 int main() {
 //    v_tree_test();
-v_static_test_1();
-//v_dynamic_test_1();
+//v_static_test_1();
+v_dynamic_test_1();
     return 0;
 }

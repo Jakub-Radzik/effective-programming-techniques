@@ -16,43 +16,44 @@ CTreeStatic::~CTreeStatic() {
 void CTreeStatic::vPrintTree() {
     c_root.vPrintAllBelow();
 }
-//TODO: repair that
+
 bool bMoveSubtree(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode) {
     if (!pcParentNode || !pcNewChildNode) {
         return false;
     }
 
+    c_copy_tree_recursive(pcParentNode, pcNewChildNode);
+
     //Old parent lost child
-    pcNewChildNode->getPcParentNode()->removeChild(pcNewChildNode);
-
-    //New parent get new child
-    pcParentNode->vAddNewChild();
-    pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1)->vSetValue(pcNewChildNode->getIVal());
-
-    //Child get new parent
-    pcNewChildNode->setPcParentNode(pcParentNode);
-
-    if (pcNewChildNode->iGetChildrenNumber() > 0) {
-        for (int i = 0; i < pcNewChildNode->iGetChildrenNumber(); i++) {
-            bMoveSubtree(pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1),
-                         pcNewChildNode->pcGetChild(i));
-        }
+    if (pcNewChildNode->getPcParentNode()) {
+        //Node is not a root
+        pcNewChildNode->getPcParentNode()->removeChild(pcNewChildNode);
+    } else {
+        //Node is tree root
+        pcNewChildNode->removeAllChildren();
     }
-
 
     return true;
 }
 
-//IDK
-void c_copy_tree_recursive(CNodeStatic *c_destination, CNodeStatic *c_source) {
+void c_copy_tree_recursive(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode) {
+    //New parent get new child
+    pcParentNode->vAddNewChild();
+    pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1)->vSetValue(pcNewChildNode->getIVal());
 
-
+    if (pcNewChildNode->iGetChildrenNumber() > 0) {
+        for (int i = 0; i < pcNewChildNode->iGetChildrenNumber(); i++) {
+            c_copy_tree_recursive(pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1),
+                                  pcNewChildNode->pcGetChild(i));
+        }
+    }
 }
 
 
 void v_static_test_1() {
     CTreeStatic c_tree_1;
     CTreeStatic c_tree_2;
+
     c_tree_1.pcGetRoot()->vSetValue(1);
     c_tree_2.pcGetRoot()->vSetValue(10);
 

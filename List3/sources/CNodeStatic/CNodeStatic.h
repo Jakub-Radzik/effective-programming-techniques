@@ -36,6 +36,8 @@ public:
 
     int getIVal() const;
 
+    void removeAllChildren();
+
 private:
     std::vector<CNodeStatic> v_children;
     CNodeStatic *pc_parent_node;
