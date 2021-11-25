@@ -36,15 +36,15 @@ bool bMoveSubtree(CNodeStatic *pc_parent_node, CNodeStatic *pc_new_child_node) {
     return true;
 }
 
-void vCopyTreeRecursive(CNodeStatic *c_destination, CNodeStatic *c_source) {
+void vCopyTreeRecursive(CNodeStatic *pc_destination, CNodeStatic *pc_source) {
     //New parent get new child
-    c_destination->vAddNewChild();
-    c_destination->pcGetChild(c_destination->iGetChildrenNumber() - 1)->vSetValue(c_source->getIVal());
+    pc_destination->vAddNewChild();
+    pc_destination->pcGetChild(pc_destination->iGetChildrenNumber() - 1)->vSetValue(pc_source->getIVal());
 
-    if (c_source->iGetChildrenNumber() > 0) {
-        for (int i = 0; i < c_source->iGetChildrenNumber(); i++) {
-            vCopyTreeRecursive(c_destination->pcGetChild(c_destination->iGetChildrenNumber() - 1),
-                               c_source->pcGetChild(i));
+    if (pc_source->iGetChildrenNumber() > 0) {
+        for (int i = 0; i < pc_source->iGetChildrenNumber(); i++) {
+            vCopyTreeRecursive(pc_destination->pcGetChild(pc_destination->iGetChildrenNumber() - 1),
+                               pc_source->pcGetChild(i));
         }
     }
 }

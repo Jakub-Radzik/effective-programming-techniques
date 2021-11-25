@@ -23,7 +23,7 @@ private:
 };
 
 bool bMoveSubtree(CNodeStatic *pc_parent_node, CNodeStatic *pc_new_child_node);
-void vCopyTreeRecursive(CNodeStatic *c_destination, CNodeStatic *c_source);
+void vCopyTreeRecursive(CNodeStatic *pc_destination, CNodeStatic *pc_source);
 void vStaticTest1();
 
 

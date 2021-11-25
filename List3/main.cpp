@@ -5,7 +5,7 @@
 
 int main() {
 //    vTreeTest();
-//    vStaticTest1();
-    vDynamicTest1();
+    vStaticTest1();
+//    vDynamicTest1();
     return 0;
 }
