@@ -13,7 +13,7 @@ public:
 
     ~CNodeDynamic();
 
-    void vSetValue(int iNewVal);
+    void vSetValue(int i_new_val);
 
     int iGetChildrenNumber();
 
@@ -21,7 +21,7 @@ public:
 
     void vAddNewChild(CNodeDynamic *c_node_to_append);
 
-    CNodeDynamic *pcGetChild(int iChildOffset);
+    CNodeDynamic *pcGetChild(int i_child_offset);
 
     void vPrint();
 
@@ -29,11 +29,9 @@ public:
 
     CNodeDynamic *getPcParentNode();
 
-    void setPcParentNode(CNodeDynamic *pcParentNode);
+    void setPcParentNode(CNodeDynamic *pc_parent_node);
 
-    void removeChild(CNodeDynamic *oldChild);
-
-    int getIVal() const;
+    void removeChild(CNodeDynamic *pc_child_to_remove);
 
 private:
     std::vector<CNodeDynamic *> v_children;

@@ -5,12 +5,17 @@
 #include <iostream>
 #include "CNodeStatic.h"
 
+CNodeStatic::CNodeStatic() {
+    i_val = 0;
+    pc_parent_node = nullptr;
+}
+
 
 CNodeStatic::~CNodeStatic() {
 }
 
-void CNodeStatic::vSetValue(int iNewVal) {
-    i_val = iNewVal;
+void CNodeStatic::vSetValue(int i_new_val) {
+    i_val = i_new_val;
 }
 
 int CNodeStatic::iGetChildrenNumber() {
@@ -30,6 +35,8 @@ CNodeStatic *CNodeStatic::pcGetChild(int i_child_offset) {
 
     return &v_children[i_child_offset];
 }
+
+void CNodeStatic::vPrint() { std::cout << " " << i_val; };
 
 void CNodeStatic::vPrintAllBelow() {
     vPrint();
@@ -51,17 +58,17 @@ CNodeStatic *CNodeStatic::getPcParentNode() const {
     return pc_parent_node;
 }
 
-void CNodeStatic::setPcParentNode(CNodeStatic *pcParentNode) {
-    pc_parent_node = pcParentNode;
+void CNodeStatic::setPcParentNode(CNodeStatic *pc_new_parent_node) {
+    pc_parent_node = pc_new_parent_node;
 }
 
 int CNodeStatic::getIVal() const {
     return i_val;
 }
 
-void CNodeStatic::removeChild(CNodeStatic *oldChild) {
+void CNodeStatic::removeChild(CNodeStatic *pc_child_to_remove) {
     for (int i = 0; i < iGetChildrenNumber(); i++) {
-        if (&v_children[i] == oldChild) {
+        if (&v_children[i] == pc_child_to_remove) {
             v_children.erase(v_children.begin() + i);
         }
     }
@@ -71,7 +78,7 @@ void CNodeStatic::removeAllChildren() {
     v_children.clear();
 }
 
-void v_tree_test() {
+void vTreeTest() {
     CNodeStatic c_root;
     c_root.vAddNewChild();
     c_root.vAddNewChild();
@@ -89,7 +96,6 @@ void v_tree_test() {
     c_root.vPrintAllBelow();
     std::cout << std::endl;
     c_root.pcGetChild(0)->pcGetChild(1)->vPrintUp();
-
 }
 
 

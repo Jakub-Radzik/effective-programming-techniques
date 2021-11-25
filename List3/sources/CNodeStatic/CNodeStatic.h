@@ -10,14 +10,11 @@
 
 class CNodeStatic {
 public:
-    CNodeStatic() {
-        i_val = 0;
-        pc_parent_node = nullptr;
-    }
+    CNodeStatic();
 
     ~CNodeStatic();
 
-    void vSetValue(int iNewVal);
+    void vSetValue(int i_new_val);
 
     int iGetChildrenNumber();
 
@@ -25,14 +22,17 @@ public:
 
     CNodeStatic *pcGetChild(int i_child_offset);
 
-    void vPrint() {std::cout << " " << i_val;};
+    void vPrint();
+
     void vPrintAllBelow();
+
     void vPrintUp();
 
-    void removeChild(CNodeStatic *oldChild);
+    void removeChild(CNodeStatic *pc_child_to_remove);
 
     CNodeStatic *getPcParentNode() const;
-    void setPcParentNode(CNodeStatic *pcParentNode);
+
+    void setPcParentNode(CNodeStatic *pc_new_parent_node);
 
     int getIVal() const;
 
@@ -45,7 +45,7 @@ private:
 
 };
 
-void v_tree_test();
+void vTreeTest();
 
 //class CNodeStatic
 

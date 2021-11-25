@@ -14,7 +14,7 @@ public:
 
     ~CTreeStatic();
 
-    CNodeStatic *pcGetRoot() { return (&c_root); }
+    CNodeStatic *pcGetRoot();
 
     void vPrintTree();
 
@@ -22,9 +22,9 @@ private:
     CNodeStatic c_root;
 };
 
-bool bMoveSubtree(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode);
-void c_copy_tree_recursive(CNodeStatic *c_destination, CNodeStatic *c_source);
-void v_static_test_1();
+bool bMoveSubtree(CNodeStatic *pc_parent_node, CNodeStatic *pc_new_child_node);
+void vCopyTreeRecursive(CNodeStatic *c_destination, CNodeStatic *c_source);
+void vStaticTest1();
 
 
 #endif //LIST3_CTREESTATIC_H

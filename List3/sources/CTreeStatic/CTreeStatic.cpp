@@ -11,44 +11,46 @@ CTreeStatic::CTreeStatic() {
 CTreeStatic::~CTreeStatic() {
 }
 
+CNodeStatic *CTreeStatic::pcGetRoot() { return (&c_root); }
+
 void CTreeStatic::vPrintTree() {
     c_root.vPrintAllBelow();
 }
 
-bool bMoveSubtree(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode) {
-    if (!pcParentNode || !pcNewChildNode) {
+bool bMoveSubtree(CNodeStatic *pc_parent_node, CNodeStatic *pc_new_child_node) {
+    if (!pc_parent_node || !pc_new_child_node) {
         return false;
     }
 
-    c_copy_tree_recursive(pcParentNode, pcNewChildNode);
+    vCopyTreeRecursive(pc_parent_node, pc_new_child_node);
 
     //Old parent lost child
-    if (pcNewChildNode->getPcParentNode()) {
+    if (pc_new_child_node->getPcParentNode()) {
         //Node is not a root
-        pcNewChildNode->getPcParentNode()->removeChild(pcNewChildNode);
+        pc_new_child_node->getPcParentNode()->removeChild(pc_new_child_node);
     } else {
         //Node is tree root
-        pcNewChildNode->removeAllChildren();
+        pc_new_child_node->removeAllChildren();
     }
 
     return true;
 }
 
-void c_copy_tree_recursive(CNodeStatic *pcParentNode, CNodeStatic *pcNewChildNode) {
+void vCopyTreeRecursive(CNodeStatic *c_destination, CNodeStatic *c_source) {
     //New parent get new child
-    pcParentNode->vAddNewChild();
-    pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1)->vSetValue(pcNewChildNode->getIVal());
+    c_destination->vAddNewChild();
+    c_destination->pcGetChild(c_destination->iGetChildrenNumber() - 1)->vSetValue(c_source->getIVal());
 
-    if (pcNewChildNode->iGetChildrenNumber() > 0) {
-        for (int i = 0; i < pcNewChildNode->iGetChildrenNumber(); i++) {
-            c_copy_tree_recursive(pcParentNode->pcGetChild(pcParentNode->iGetChildrenNumber() - 1),
-                                  pcNewChildNode->pcGetChild(i));
+    if (c_source->iGetChildrenNumber() > 0) {
+        for (int i = 0; i < c_source->iGetChildrenNumber(); i++) {
+            vCopyTreeRecursive(c_destination->pcGetChild(c_destination->iGetChildrenNumber() - 1),
+                               c_source->pcGetChild(i));
         }
     }
 }
 
 
-void v_static_test_1() {
+void vStaticTest1() {
     CTreeStatic c_tree_1;
     CTreeStatic c_tree_2;
 

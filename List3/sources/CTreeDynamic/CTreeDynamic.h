@@ -22,9 +22,9 @@ private:
     CNodeDynamic *pc_root;
 };
 
-bool bMoveSubtree(CNodeDynamic *pcParentNode, CNodeDynamic *pcNewChildNode);
+bool bMoveSubtree(CNodeDynamic *pc_parent_node, CNodeDynamic *pc_new_child_node);
 
-void v_dynamic_test_1();
+void vDynamicTest1();
 
 
 #endif //LIST3_CTREEDYNAMIC_H
