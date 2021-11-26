@@ -20,8 +20,10 @@ public:
 
 private:
     CNodeDynamic *pc_root;
+
 };
 
+bool bNodesAreInTheSameTree(CNodeDynamic *pc_node_1, CNodeDynamic *pc_node_2);
 bool bMoveSubtree(CNodeDynamic *pc_parent_node, CNodeDynamic *pc_new_child_node);
 
 void vDynamicTest1();

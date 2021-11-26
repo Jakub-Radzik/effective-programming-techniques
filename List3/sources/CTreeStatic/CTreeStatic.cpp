@@ -18,7 +18,7 @@ void CTreeStatic::vPrintTree() {
 }
 
 bool bMoveSubtree(CNodeStatic *pc_parent_node, CNodeStatic *pc_new_child_node) {
-    if (!pc_parent_node || !pc_new_child_node) {
+    if (!pc_parent_node || !pc_new_child_node || bNodesAreInTheSameTree(pc_parent_node, pc_new_child_node)) {
         return false;
     }
 
@@ -50,6 +50,37 @@ void vCopyTreeRecursive(CNodeStatic *pc_destination, CNodeStatic *pc_source) {
 }
 
 
+bool bNodesAreInTheSameTree(CNodeStatic *pc_node_1, CNodeStatic *pc_node_2) {
+    if (!pc_node_1 || !pc_node_2) {
+        return false;
+    }
+
+    CNodeStatic *pc_node_1_parent;
+    CNodeStatic *pc_node_2_parent;
+
+    if (pc_node_1->getPcParentNode()) {
+        pc_node_1_parent = pc_node_1->getPcParentNode();
+    } else {
+        pc_node_1_parent = pc_node_1;
+    }
+
+    if (pc_node_2->getPcParentNode()) {
+        pc_node_2_parent = pc_node_2->getPcParentNode();
+    } else {
+        pc_node_2_parent = pc_node_2;
+    }
+
+    while (pc_node_1_parent) {
+        pc_node_1_parent = pc_node_1_parent->getPcParentNode();
+    }
+
+    while (pc_node_2_parent) {
+        pc_node_2_parent = pc_node_2_parent->getPcParentNode();
+    }
+
+    return pc_node_1_parent == pc_node_2_parent;
+}
+
 void vStaticTest1() {
     CTreeStatic c_tree_1;
     CTreeStatic c_tree_2;
@@ -77,7 +108,7 @@ void vStaticTest1() {
     std::cout << std::endl << "c_tree_2 before move: " << std::endl;
     c_tree_2.vPrintTree();
     std::cout << std::endl;
-    bMoveSubtree(c_tree_2.pcGetRoot(), c_tree_1.pcGetRoot()->pcGetChild(0));
+    bMoveSubtree(c_tree_1.pcGetRoot(), c_tree_1.pcGetRoot()->pcGetChild(0));
 
     std::cout << "c_tree_1 after move: " << std::endl;
     c_tree_1.vPrintTree();

@@ -23,7 +23,7 @@ CNodeDynamic *CTreeDynamic::pcGetRoot() { return pc_root; }
 
 
 bool bMoveSubtree(CNodeDynamic *pc_parent_node, CNodeDynamic *pc_new_child_node) {
-    if (!pc_parent_node || !pc_new_child_node) {
+    if (!pc_parent_node || !pc_new_child_node || bNodesAreInTheSameTree(pc_parent_node, pc_new_child_node)) {
         return false;
     }
 
@@ -34,6 +34,37 @@ bool bMoveSubtree(CNodeDynamic *pc_parent_node, CNodeDynamic *pc_new_child_node)
     pc_new_child_node->setPcParentNode(pc_parent_node);
 
     return true;
+}
+
+bool bNodesAreInTheSameTree(CNodeDynamic *pc_node_1, CNodeDynamic *pc_node_2) {
+    if (!pc_node_1 || !pc_node_2) {
+        return false;
+    }
+
+    CNodeDynamic *pc_node_1_parent;
+    CNodeDynamic *pc_node_2_parent;
+
+    if (pc_node_1->getPcParentNode()) {
+        pc_node_1_parent = pc_node_1->getPcParentNode();
+    } else {
+        pc_node_1_parent = pc_node_1;
+    }
+
+    if (pc_node_2->getPcParentNode()) {
+        pc_node_2_parent = pc_node_2->getPcParentNode();
+    } else {
+        pc_node_2_parent = pc_node_2;
+    }
+
+    while (pc_node_1_parent) {
+        pc_node_1_parent = pc_node_1_parent->getPcParentNode();
+    }
+
+    while (pc_node_2_parent) {
+        pc_node_2_parent = pc_node_2_parent->getPcParentNode();
+    }
+
+    return pc_node_1_parent == pc_node_2_parent;
 }
 
 void vDynamicTest1() {
