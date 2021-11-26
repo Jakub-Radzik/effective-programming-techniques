@@ -18,7 +18,7 @@ void CTreeStatic::vPrintTree() {
 }
 
 bool bMoveSubtree(CNodeStatic *pc_parent_node, CNodeStatic *pc_new_child_node) {
-    if (!pc_parent_node || !pc_new_child_node || bNodesAreInTheSameTree(pc_parent_node, pc_new_child_node)) {
+    if (!pc_parent_node || !pc_new_child_node) {
         return false;
     }
 
@@ -108,7 +108,7 @@ void vStaticTest1() {
     std::cout << std::endl << "c_tree_2 before move: " << std::endl;
     c_tree_2.vPrintTree();
     std::cout << std::endl;
-    bMoveSubtree(c_tree_1.pcGetRoot(), c_tree_1.pcGetRoot()->pcGetChild(0));
+    bMoveSubtree(c_tree_1.pcGetRoot(), c_tree_2.pcGetRoot()->pcGetChild(0));
 
     std::cout << "c_tree_1 after move: " << std::endl;
     c_tree_1.vPrintTree();
