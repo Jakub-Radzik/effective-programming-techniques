@@ -16,10 +16,13 @@ public:
 
     CNodeDynamic *pcGetRoot();
 
+    void vPruneVal(int i_val);
+
     void vPrintTree();
 
 private:
     CNodeDynamic *pc_root;
+    void vPrune(CNodeDynamic *pc_node, int i_val);
 
 };
 
@@ -27,6 +30,7 @@ bool bNodesAreInTheSameTree(CNodeDynamic *pc_node_1, CNodeDynamic *pc_node_2);
 bool bMoveSubtree(CNodeDynamic *pc_parent_node, CNodeDynamic *pc_new_child_node);
 
 void vDynamicTest1();
+void vDynamicPruneTest();
 
 
 #endif //LIST3_CTREEDYNAMIC_H

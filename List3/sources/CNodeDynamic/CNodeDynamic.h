@@ -33,6 +33,10 @@ public:
 
     void removeChild(CNodeDynamic *pc_child_to_remove);
 
+    int getIVal() const;
+
+    CNodeDynamic *getChild(int i_child_offset);
+
 private:
     std::vector<CNodeDynamic *> v_children;
     CNodeDynamic *pc_parent_node;

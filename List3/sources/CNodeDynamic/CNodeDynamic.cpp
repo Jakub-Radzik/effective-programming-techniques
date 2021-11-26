@@ -35,6 +35,7 @@ void CNodeDynamic::vAddNewChild() {
 }
 
 void CNodeDynamic::vAddNewChild(CNodeDynamic *c_node_to_append) {
+//    c_node_to_append->setPcParentNode(this);
     v_children.push_back(c_node_to_append);
 }
 
@@ -68,4 +69,12 @@ void CNodeDynamic::removeChild(CNodeDynamic *pc_child_to_remove) {
             v_children.erase(v_children.begin() + i);
         }
     }
+}
+
+int CNodeDynamic::getIVal() const {
+    return i_val;
+}
+
+CNodeDynamic *CNodeDynamic::getChild(int i_child_offset) {
+    return v_children[i_child_offset];
 }
