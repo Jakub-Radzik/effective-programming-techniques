@@ -87,10 +87,35 @@ void CNodeDynamic<T>::vAddNewChild() {
     newNode = nullptr;
 }
 
+template<>
+void CNodeDynamic<int>::vAddNewChild() {
+    if (this->iGetChildrenNumber() < this->getTVal()) {
+        CNodeDynamic *newNode;
+        newNode = new CNodeDynamic();
+        newNode->setPcParentNode(this);
+        v_children.push_back(newNode);
+        newNode = nullptr;
+        std::cout << "Dodano nowy wezel " << std::endl;
+    } else {
+        std::cout << "Nie mozna dodac dziecka, bo nie ma juz miejsca" << std::endl;
+    }
+}
+
 template<typename T>
 void CNodeDynamic<T>::vAddNewChild(CNodeDynamic *c_node_to_append) {
     c_node_to_append->setPcParentNode(this);
     v_children.push_back(c_node_to_append);
+}
+
+template<>
+void CNodeDynamic<int>::vAddNewChild(CNodeDynamic *c_node_to_append) {
+    if (this->iGetChildrenNumber() < this->getTVal()) {
+        c_node_to_append->setPcParentNode(this);
+        v_children.push_back(c_node_to_append);
+        std::cout<<"Dodano nowy wezel o wartosci: "<<c_node_to_append->getTVal()<<std::endl;
+    }else{
+        std::cout<<"Nie mozna dodac dziecka, bo nie ma juz miejsca"<<std::endl;
+    }
 }
 
 template<typename T>

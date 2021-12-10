@@ -235,5 +235,18 @@ void vDoublePointerDynamicTest1() {
     delete c_tree_1;
     delete c_tree_2;
 }
+void vIntAddChildTest(){
+    CTreeDynamic<int> *c_tree_1;
+    c_tree_1 = new CTreeDynamic<int>();
+
+    c_tree_1->pcGetRoot()->vSetValue(5);
+    c_tree_1->pcGetRoot()->vAddNewChild();
+    c_tree_1->pcGetRoot()->vAddNewChild();
+    c_tree_1->pcGetRoot()->vAddNewChild();
+    c_tree_1->pcGetRoot()->vAddNewChild();
+    c_tree_1->pcGetRoot()->vAddNewChild();
+    c_tree_1->pcGetRoot()->vAddNewChild();
+    c_tree_1->vPrintTree();
+}
 
 #endif //LISTA4_CTREEDYNAMIC_H
