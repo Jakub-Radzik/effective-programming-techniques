@@ -52,14 +52,6 @@ public:
 
         return *this;
     }
-
-
-//    TODO: do wyjebania
-    //uselesss chyba
-    T &operator[](int index) { return pc_pointer[index]; }
-
-    const T &operator[](int index) const { return pc_pointer[index]; }
-
 private:
     T *pc_pointer;
     CRefCounter *pc_counter;
