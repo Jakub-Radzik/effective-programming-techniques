@@ -36,7 +36,6 @@ public:
     CTable operator=(CTable &&cOther) noexcept;;
 
     CTable operator+(const CTable &c_added_table);
-    CTable operator+(const CTable &&c_added_table);
 
     void v_set_value_at(int iOffset, int iNewVal);
 

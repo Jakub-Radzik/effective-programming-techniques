@@ -37,7 +37,6 @@ public:
 
     T *operator->() { return pc_pointer; }
 
-
     CMySmartPointer<T> &operator=(const CMySmartPointer<T> &c_other) {
         if (this != &c_other) {
             if (pc_counter && pc_counter->iDec() == 0) {
