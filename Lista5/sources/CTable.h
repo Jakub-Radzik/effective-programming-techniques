@@ -2,7 +2,51 @@
 // Created by Jakub Radzik on 12/12/2021.
 //
 
-#include "CTable.h"
+#ifndef LISTA5_CTABLE_H
+#define LISTA5_CTABLE_H
+
+#define DEF_SIZE 0
+#define  NAME "Name"
+
+#include <iostream>
+#include <string>
+
+class CTable {
+public:
+    CTable();
+
+    CTable(std::string sName, int iTableLen);
+
+    CTable(CTable &pcOther);
+
+    CTable(CTable &&pcOther);
+
+    ~CTable();
+
+    void v_set_name(std::string sName);
+
+    bool b_set_new_size(int i_table_length);
+
+    void v_print_array();
+
+    CTable *pcClone();
+
+    CTable operator=(const CTable &c_assign_table);
+
+    CTable operator=(CTable &&cOther) noexcept;;
+
+    CTable operator+(const CTable &c_added_table);
+
+    void v_set_value_at(int iOffset, int iNewVal);
+
+private:
+    static const int i_default_size;
+    static const std::string s_default_name;
+
+    std::string s_name;
+    int i_size;
+    int *i_array;
+};
 
 //CONSTANTS
 const int CTable::i_default_size = 100;
@@ -43,7 +87,7 @@ CTable::CTable(CTable &&pcOther) {
     i_size = pcOther.i_size;
     i_array = pcOther.i_array;
 
-    pcOther.s_name.erase();
+    pcOther.s_name = "";
     pcOther.i_size = 0;
     pcOther.i_array = nullptr;
 
@@ -54,7 +98,9 @@ CTable::CTable(CTable &&pcOther) {
 CTable::~CTable() {
     std::cout << "usuwam: " << s_name << std::endl;
 
-    delete[] i_array;
+    if(i_array != nullptr) {
+        delete[] i_array;
+    }
 }
 
 void CTable::v_set_name(std::string sName) {
@@ -141,9 +187,11 @@ CTable CTable::operator+(const CTable &c_added_table) {
     for (int i = i_oldSize; i < i_newSize; ++i)
         v_set_value_at(i, c_added_table.i_array[i - i_oldSize]);
 
-    return *this;
+    return std::move(*this);
 }
 
 void CTable::v_set_value_at(int iOffset, int iNewVal) {
     i_array[iOffset] = iNewVal;
 }
+
+#endif //LISTA5_CTABLE_H
