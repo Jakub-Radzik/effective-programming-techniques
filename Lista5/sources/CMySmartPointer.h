@@ -17,7 +17,8 @@ public:
         pc_counter = NULL;
     }
 
-    CMySmartPointer(const CMySmartPointer<T> &pc_other) {
+    CMySmartPointer(const CMySmartPoint
+            er<T> &pc_other) {
         pc_pointer = pc_other.pc_pointer;
         pc_counter = pc_other.pc_counter;
 
