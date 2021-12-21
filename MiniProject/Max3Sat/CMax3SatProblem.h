@@ -13,32 +13,25 @@
 #include <map>
 #include <math.h>
 #include "Node.h"
+#include "Sentence.h"
 
 class CMax3SatProblem {
 public:
     CMax3SatProblem(std::string fileName);
-
     int solve();
-
     ~CMax3SatProblem();
 
 private:
     void load();
     void compute();
-//    bool isSatisfiable();
-    bool isVectorContainsVariable(const std::string& iVariable);
+    int isVectorContainsVariable(const int& iVariable);
     void checkSentences();
+    Sentence *parseSentenceIntoTable(std::string sSentence);
 
-    std::string *parseSentenceIntoTable(std::string sentence);
-    void printTable();
+    std::vector<Sentence *> vector_of_sentences;
+    std::vector<Node*> vector_of_nodes_variables;
 
     std::string s_file_name;
-    //TODO: sentences should be a vector of objects
-    //TODO: each object should have a reference to nodes
-    std::vector<std::string *> i_vector_of_sentences;
-
-    std::vector<Node*> n_vector_of_variables;
-
     int i_sentences_count;
     int i_variables_count;
     int i_number_of_variables_in_sentence;
@@ -47,3 +40,4 @@ private:
 
 
 #endif //MINIPROJECT_CMAX3SATPROBLEM_H
+

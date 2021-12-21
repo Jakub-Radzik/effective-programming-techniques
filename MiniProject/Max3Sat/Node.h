@@ -9,19 +9,24 @@
 
 class Node {
 public:
-    Node(std::string iVariable, bool bValue);
+    Node(int iVariable, bool bValue);
     ~Node();
 
-    const std::string &getIVariable() const;
+    const int &getIVariable() const;
 
-    void setIVariable(const std::string &iVariable);
+    void setIVariable(const int &iVariable);
 
     bool isBValue() const;
 
     void setBValue(bool bValue);
 
+    void incrementRefCount();
+    void decrementRefCount();
+    int getIRefCount() const;
+
 private:
-    std::string i_variable;
+    int i_variable;
+    int i_ref_count;
     bool b_value;
 };
 
