@@ -6,6 +6,7 @@
 
 CGAIndividual::CGAIndividual(int iGenotypeSize) {
     i_genotype_size = iGenotypeSize;
+    genotype = std::vector<bool>(iGenotypeSize);
 }
 
 CGAIndividual::CGAIndividual(CGAIndividual &other) {
@@ -34,7 +35,7 @@ double CGAIndividual::v_fitness() {
     return (i_fitness / i_genotype_size) * 100;
 }
 
-void CGAIndividual::v_mutation(int iMutationProbability) {
+void CGAIndividual::v_mutation(double iMutationProbability) {
     for (int i = 0; i < i_genotype_size; i++) {
         if (rand() % 100 < iMutationProbability) {
             genotype[i] = !genotype[i];

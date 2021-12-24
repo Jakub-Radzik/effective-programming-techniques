@@ -17,7 +17,7 @@ public:
 
     void v_crossover(CGAIndividual &parent1, CGAIndividual &parent2);
 
-    void v_mutation(int iMutationProbability);
+    void v_mutation(double iMutationProbability);
 
     double v_fitness();
 
