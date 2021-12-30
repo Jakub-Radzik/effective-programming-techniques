@@ -6,11 +6,19 @@
 
 CGAIndividual::CGAIndividual(int iGenotypeSize) {
     i_genotype_size = iGenotypeSize;
+    s_name = "";
+    genotype = std::vector<bool>(iGenotypeSize);
+}
+
+CGAIndividual::CGAIndividual(int iGenotypeSize, std::string sName) {
+    i_genotype_size = iGenotypeSize;
+    s_name = sName;
     genotype = std::vector<bool>(iGenotypeSize);
 }
 
 CGAIndividual::CGAIndividual(CGAIndividual &other) {
     i_genotype_size = other.i_genotype_size;
+    s_name = other.s_name;
     genotype = other.genotype;
 }
 
@@ -37,7 +45,7 @@ double CGAIndividual::v_fitness() {
 
 void CGAIndividual::v_mutation(double iMutationProbability) {
     for (int i = 0; i < i_genotype_size; i++) {
-        if (rand() % 100 < iMutationProbability) {
+        if (((double)(rand() % 100) / 100) < iMutationProbability) {
             genotype[i] = !genotype[i];
         }
     }
@@ -51,5 +59,21 @@ void CGAIndividual::v_randomize() {
 
 CGAIndividual::~CGAIndividual() {
     genotype.clear();
+}
+
+const std::string &CGAIndividual::getSName() const {
+    return s_name;
+}
+
+void CGAIndividual::setSName(const std::string &sName) {
+    s_name = sName;
+}
+
+std::string CGAIndividual::s_genotype_to_string() {
+    std::string s_genotype = "";
+    for (int i = 0; i < i_genotype_size; i++) {
+        s_genotype += std::to_string(genotype[i]);
+    }
+    return s_genotype;
 }
 

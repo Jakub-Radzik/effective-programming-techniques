@@ -11,9 +11,10 @@ void Max3Sat() {
 int main() {
 //    Max3Sat();
 
-    CGAOptimizer optimizer(100, 0.3, 0.6);
+    CGAOptimizer optimizer(100, 0.3, 0.5);
     optimizer.v_initialize();
     optimizer.v_run_iteration();
+
 
     return 0;
 }
