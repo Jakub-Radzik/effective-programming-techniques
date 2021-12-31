@@ -12,10 +12,13 @@ CMax3SatProblem::CMax3SatProblem(std::string fileName) {
     i_max_number_of_fulfilled_sentences = 0;
     vector_of_sentences = std::vector<Sentence *>();
     vector_of_nodes_variables = std::vector<Node *>();
+    i_number_of_population = 100;
 }
 
 CMax3SatProblem::~CMax3SatProblem() {
     s_file_name = "";
+
+    delete cgaOptimizer;
 
     for (int i = 0; i < i_variables_count; ++i) {
         delete vector_of_nodes_variables[i];
@@ -23,8 +26,6 @@ CMax3SatProblem::~CMax3SatProblem() {
     for (int i = 0; i < i_sentences_count; i++) {
         delete vector_of_sentences[i];
     }
-
-
 }
 
 int CMax3SatProblem::solve() {
@@ -66,6 +67,7 @@ void CMax3SatProblem::load() {
     }
 
     std::cout << "Contains " << i_variables_count << " variables" << std::endl;
+    cgaOptimizer = new CGAOptimizer(100, 0.3, 0.5, i_variables_count);
 
 }
 
@@ -79,37 +81,34 @@ int CMax3SatProblem::isVectorContainsVariable(const int &iVariable) {
 }
 
 void CMax3SatProblem::compute() {
-    unsigned long long int i_number_of_possible_solutions = pow(2, i_variables_count);
-    std::cout << "Start computing... " << std::endl;
-    std::cout << "Number of solutions: " << i_number_of_possible_solutions << std::endl;
+    CGAIndividual *individual;
 
-    int i_global_state = 0;
-    int i_temporary_state = 0;
+    int i1 = 50; //TODO: make this a const - number of generated populations
 
-    for (int i = 0;  i < i_number_of_possible_solutions && i_max_number_of_fulfilled_sentences != i_sentences_count; i++) {
-        std::cout << "Checking solution: " << i + 1 << "/" << i_number_of_possible_solutions;
-        std::cout << " [" << std::bitset<6 * sizeof(i_variables_count)>(i_global_state) << "]";
+    cgaOptimizer->v_initialize();
 
-        for (int j = i_variables_count - 1; j >= 0; j--) {
-            vector_of_nodes_variables[j]->setBValue(i_temporary_state & 1);
-            i_temporary_state = i_temporary_state >> 1;
+    for (int k = 0; k < i1; k++) {
+        //iterate over k number of populations
+
+        //iterate over population
+        for (int i = 0; i < i_number_of_population; i++) {
+            individual = cgaOptimizer->getPopulation()[i];
+
+            //iterate over member genotype
+            for (int j = 0; j < i_variables_count; ++j) {
+                vector_of_nodes_variables[j]->setBValue(individual->getGenotype()[j]);
+            }
+
+            checkSentences(*individual);
         }
-
-        checkSentences();
-
-        //reset variables
-        for (int j = 0; j < i_variables_count; j++) {
-            vector_of_nodes_variables[j]->setBValue(false);
-        }
-
-        //prepare for next iteration
-        i_global_state++;
-        i_temporary_state = i_global_state;
-
+        cgaOptimizer->v_run_iteration();
     }
+
+    individual = nullptr;
+    delete individual;
 }
 
-void CMax3SatProblem::checkSentences() {
+void CMax3SatProblem::checkSentences(CGAIndividual &individual) {
     int i_temp_number_of_fulfilled_sentences = 0;
     for (int i = 0; i < i_sentences_count; i++) {
         if (vector_of_sentences[i]->resolveSentence()) {
@@ -117,8 +116,11 @@ void CMax3SatProblem::checkSentences() {
         }
     }
 
-    std::cout << " - " << i_temp_number_of_fulfilled_sentences << " of " << i_sentences_count
-              << " sentences are fulfilled" << std::endl;
+
+    individual.setDFitness(i_temp_number_of_fulfilled_sentences);
+
+    //TODO: consider storing best individual object (std::copy)
+
     if (i_temp_number_of_fulfilled_sentences > i_max_number_of_fulfilled_sentences) {
         i_max_number_of_fulfilled_sentences = i_temp_number_of_fulfilled_sentences;
     }

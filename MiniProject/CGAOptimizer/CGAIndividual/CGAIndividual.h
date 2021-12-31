@@ -12,8 +12,6 @@ class CGAIndividual {
 public:
     CGAIndividual(int iGenotypeSize);
 
-    CGAIndividual(int iGenotypeSize, std::string sName);
-
     CGAIndividual(CGAIndividual &other);
 
     ~CGAIndividual();
@@ -22,19 +20,19 @@ public:
 
     void v_mutation(double iMutationProbability);
 
-    double v_fitness();
+    double fitness();
 
     void v_randomize();
 
-    const std::string &getSName() const;
-
-    void setSName(const std::string &sName);
-
     std::string s_genotype_to_string();
+
+    const std::vector<bool> &getGenotype() const;
+
+    void setDFitness(double dFitness);
 
 private:
     std::vector<bool> genotype;
-    std::string s_name;
+    double d_fitness;
     int i_genotype_size;
 };
 
