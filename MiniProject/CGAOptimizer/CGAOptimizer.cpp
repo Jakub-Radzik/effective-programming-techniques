@@ -7,8 +7,8 @@
 CGAOptimizer::CGAOptimizer(int populationSize, double mutationProbability, double crossoverProbability,
                            int iGenotypeSize) {
     i_population_size = populationSize;
-    i_mutation_probability = mutationProbability;
-    i_crossover_probability = crossoverProbability;
+    d_mutation_probability = mutationProbability;
+    d_crossover_probability = crossoverProbability;
     i_genotype_size = iGenotypeSize;
 }
 
@@ -29,7 +29,8 @@ void CGAOptimizer::v_initialize() {
 }
 
 void CGAOptimizer::v_run_iteration() {
-    std::cout << "Running iteration" << std::endl;
+    std::cout << "Running iteration: " << i_iteration_count++ << std::endl;
+
     std::vector new_population = std::vector<CGAIndividual *>();
     CGAIndividual *parent1;
     CGAIndividual *parent2;
@@ -54,12 +55,20 @@ void CGAOptimizer::v_run_iteration() {
 }
 
 CGAIndividual *CGAOptimizer::v_select_parent() {
-    return population[rand() % i_population_size];
+    CGAIndividual *possible_parent1 = population[rand() % i_population_size];
+    CGAIndividual *possible_parent2;
+    do {
+        possible_parent2 = population[rand() % i_population_size];
+    } while (possible_parent1 == possible_parent2);
+
+    if (possible_parent1->fitness() >= possible_parent2->fitness())
+        return possible_parent1;
+    return possible_parent2;
 }
 
 std::tuple<CGAIndividual *, CGAIndividual *>
 CGAOptimizer::v_crossover(CGAIndividual &parent1, CGAIndividual &parent2) {
-    if (((double) (rand() % 100) / 100) < i_crossover_probability) {
+    if (((double) (rand() % 100) / 100) < d_crossover_probability) {
         CGAIndividual *child1 = new CGAIndividual(i_genotype_size);
         CGAIndividual *child2 = new CGAIndividual(i_genotype_size);
 
@@ -80,7 +89,7 @@ CGAOptimizer::v_crossover(CGAIndividual &parent1, CGAIndividual &parent2) {
 }
 
 void CGAOptimizer::v_mutate(CGAIndividual &individual) {
-    individual.v_mutation(i_mutation_probability);
+    individual.v_mutation(d_mutation_probability);
 }
 
 const std::vector<CGAIndividual *> &CGAOptimizer::getPopulation() const {

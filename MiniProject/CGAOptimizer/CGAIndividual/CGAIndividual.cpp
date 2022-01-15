@@ -6,21 +6,21 @@
 
 CGAIndividual::CGAIndividual(int iGenotypeSize) {
     i_genotype_size = iGenotypeSize;
-    genotype = std::vector<bool>(iGenotypeSize);
+    bv_genotype = std::vector<bool>(iGenotypeSize);
 }
 
 CGAIndividual::CGAIndividual(CGAIndividual &other) {
     i_genotype_size = other.i_genotype_size;
-    genotype = other.genotype;
+    bv_genotype = other.bv_genotype;
 }
 
 
 void CGAIndividual::v_crossover(CGAIndividual &parent1, CGAIndividual &parent2) {
     for (int i = 0; i < i_genotype_size; i++) {
         if (rand() % 2 == 0) {
-            this->genotype[i] = parent1.genotype[i];
+            this->bv_genotype[i] = parent1.bv_genotype[i];
         } else {
-            this->genotype[i] = parent2.genotype[i];
+            this->bv_genotype[i] = parent2.bv_genotype[i];
         }
     }
 }
@@ -36,29 +36,21 @@ void CGAIndividual::setDFitness(double dFitness) {
 void CGAIndividual::v_mutation(double iMutationProbability) {
     for (int i = 0; i < i_genotype_size; i++) {
         if (((double) (rand() % 100) / 100) < iMutationProbability) {
-            genotype[i] = !genotype[i];
+            bv_genotype[i] = !bv_genotype[i];
         }
     }
 }
 
 void CGAIndividual::v_randomize() {
     for (int i = 0; i < i_genotype_size; i++) {
-        genotype[i] = rand() % 2;
+        bv_genotype[i] = rand() % 2;
     }
 }
 
 CGAIndividual::~CGAIndividual() {
-    genotype.clear();
-}
-
-std::string CGAIndividual::s_genotype_to_string() {
-    std::string s_genotype = "";
-    for (int i = 0; i < i_genotype_size; i++) {
-        s_genotype += std::to_string(genotype[i]);
-    }
-    return s_genotype;
+    bv_genotype.clear();
 }
 
 const std::vector<bool> &CGAIndividual::getGenotype() const {
-    return genotype;
+    return bv_genotype;
 }

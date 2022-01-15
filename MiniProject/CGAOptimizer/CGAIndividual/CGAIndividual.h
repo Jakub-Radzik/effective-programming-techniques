@@ -24,14 +24,12 @@ public:
 
     void v_randomize();
 
-    std::string s_genotype_to_string();
-
     const std::vector<bool> &getGenotype() const;
 
     void setDFitness(double dFitness);
 
 private:
-    std::vector<bool> genotype;
+    std::vector<bool> bv_genotype;
     double d_fitness;
     int i_genotype_size;
 };

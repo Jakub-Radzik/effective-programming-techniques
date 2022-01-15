@@ -22,6 +22,14 @@ public:
 
     int solve();
 
+    void setIPopulationSize(int iPopulationSize);
+
+    void setIMaxNumberOfGenerations(int iMaxNumberOfGenerations);
+
+    void setDCrossOverProbability(double dCrossOverProbability);
+
+    void setDMutationProbability(double dMutationProbability);
+
     ~CMax3SatProblem();
 
 private:
@@ -45,7 +53,11 @@ private:
     int i_variables_count;
     int i_number_of_variables_in_sentence;
     int i_max_number_of_fulfilled_sentences;
-    int i_number_of_population;
+
+    int i_population_size;
+    double d_cross_over_probability;
+    double d_mutation_probability;
+    int i_max_number_of_generations;
 };
 
 

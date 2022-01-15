@@ -30,9 +30,10 @@ public:
 
 private:
     int i_population_size;
-    double i_crossover_probability;
-    double i_mutation_probability;
+    double d_crossover_probability;
+    double d_mutation_probability;
     int i_genotype_size;
+    int i_iteration_count = 1;
     std::vector<CGAIndividual *> population;
 };
 

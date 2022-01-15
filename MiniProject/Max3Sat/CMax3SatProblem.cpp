@@ -12,7 +12,11 @@ CMax3SatProblem::CMax3SatProblem(std::string fileName) {
     i_max_number_of_fulfilled_sentences = 0;
     vector_of_sentences = std::vector<Sentence *>();
     vector_of_nodes_variables = std::vector<Node *>();
-    i_number_of_population = 100;
+
+    d_cross_over_probability = 0.3;
+    d_mutation_probability = 0.5;
+    i_population_size = 100;
+    i_max_number_of_generations = 100;
 }
 
 CMax3SatProblem::~CMax3SatProblem() {
@@ -67,7 +71,8 @@ void CMax3SatProblem::load() {
     }
 
     std::cout << "Contains " << i_variables_count << " variables" << std::endl;
-    cgaOptimizer = new CGAOptimizer(100, 0.3, 0.5, i_variables_count);
+    cgaOptimizer = new CGAOptimizer(i_population_size, d_mutation_probability, d_cross_over_probability,
+                                    i_variables_count);
 
 }
 
@@ -83,18 +88,16 @@ int CMax3SatProblem::isVectorContainsVariable(const int &iVariable) {
 void CMax3SatProblem::compute() {
     CGAIndividual *individual;
 
-    int i1 = 50; //TODO: make this a const - number of generated populations
-
     cgaOptimizer->v_initialize();
 
-    for (int k = 0; k < i1; k++) {
+    for (int k = 0; k < i_max_number_of_generations; k++) {
         //iterate over k number of populations
 
         //iterate over population
-        for (int i = 0; i < i_number_of_population; i++) {
+        for (int i = 0; i < i_population_size; i++) {
             individual = cgaOptimizer->getPopulation()[i];
 
-            //iterate over member genotype
+            //iterate over member bv_genotype
             for (int j = 0; j < i_variables_count; ++j) {
                 vector_of_nodes_variables[j]->setBValue(individual->getGenotype()[j]);
             }
@@ -150,5 +153,22 @@ Sentence *CMax3SatProblem::parseSentenceIntoTable(std::string sSentence) {
         }
     }
     return s_sentence;
+}
+
+
+void CMax3SatProblem::setIPopulationSize(int iPopulationSize) {
+    i_population_size = iPopulationSize;
+}
+
+void CMax3SatProblem::setDCrossOverProbability(double dCrossOverProbability) {
+    d_cross_over_probability = dCrossOverProbability;
+}
+
+void CMax3SatProblem::setDMutationProbability(double dMutationProbability) {
+    d_mutation_probability = dMutationProbability;
+}
+
+void CMax3SatProblem::setIMaxNumberOfGenerations(int iMaxNumberOfGenerations) {
+    i_max_number_of_generations = iMaxNumberOfGenerations;
 }
 
