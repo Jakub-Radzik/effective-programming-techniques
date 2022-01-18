@@ -30,13 +30,10 @@ CMax3SatProblem::~CMax3SatProblem() {
     for (int i = 0; i < i_sentences_count; i++) {
         delete vector_of_sentences[i];
     }
+
+    delete cgaIndividual_best_solution;
 }
 
-int CMax3SatProblem::solve() {
-    this->load();
-    this->compute();
-    return i_max_number_of_fulfilled_sentences;
-}
 
 void CMax3SatProblem::load() {
     std::cout << "Loading... " << std::endl;
@@ -85,13 +82,14 @@ int CMax3SatProblem::isVectorContainsVariable(const int &iVariable) {
     return -1;
 }
 
-void CMax3SatProblem::compute() {
-    CGAIndividual *individual;
+int CMax3SatProblem::solve() {
+    load();
 
+    CGAIndividual *individual;
     cgaOptimizer->v_initialize();
 
+    //iterate over k number of populations
     for (int k = 0; k < i_max_number_of_generations; k++) {
-        //iterate over k number of populations
 
         //iterate over population
         for (int i = 0; i < i_population_size; i++) {
@@ -102,16 +100,25 @@ void CMax3SatProblem::compute() {
                 vector_of_nodes_variables[j]->setBValue(individual->getGenotype()[j]);
             }
 
-            checkSentences(*individual);
+            compute(*individual);
         }
         cgaOptimizer->v_run_iteration();
     }
 
     individual = nullptr;
     delete individual;
+
+    std::cout << "Spełniono sentencji: " << i_max_number_of_fulfilled_sentences << std::endl;
+    std::cout << "Jakość: " << 100 * ((float) i_max_number_of_fulfilled_sentences / (float) i_sentences_count) << " %"
+              << std::endl;
+    for (int i = 0; i < i_variables_count; ++i) {
+        std::cout << "[" << vector_of_nodes_variables[i]->getIVariable() << "=" << cgaIndividual_best_solution->getGenotype()[i] << "] ";
+    }
+
+    return i_max_number_of_fulfilled_sentences;
 }
 
-void CMax3SatProblem::checkSentences(CGAIndividual &individual) {
+int CMax3SatProblem::compute(CGAIndividual &individual) {
     int i_temp_number_of_fulfilled_sentences = 0;
     for (int i = 0; i < i_sentences_count; i++) {
         if (vector_of_sentences[i]->resolveSentence()) {
@@ -119,14 +126,14 @@ void CMax3SatProblem::checkSentences(CGAIndividual &individual) {
         }
     }
 
-
     individual.setDFitness(i_temp_number_of_fulfilled_sentences);
-
-    //TODO: consider storing best individual object (std::copy)
 
     if (i_temp_number_of_fulfilled_sentences > i_max_number_of_fulfilled_sentences) {
         i_max_number_of_fulfilled_sentences = i_temp_number_of_fulfilled_sentences;
+        cgaIndividual_best_solution = &individual;
     }
+
+    return i_temp_number_of_fulfilled_sentences;
 }
 
 Sentence *CMax3SatProblem::parseSentenceIntoTable(std::string sSentence) {

@@ -35,11 +35,9 @@ public:
 private:
     void load();
 
-    void compute();
+    int compute(CGAIndividual &individual);
 
     int isVectorContainsVariable(const int &iVariable);
-
-    void checkSentences(CGAIndividual &individual);
 
     Sentence *parseSentenceIntoTable(std::string sSentence);
 
@@ -53,6 +51,7 @@ private:
     int i_variables_count;
     int i_number_of_variables_in_sentence;
     int i_max_number_of_fulfilled_sentences;
+    CGAIndividual* cgaIndividual_best_solution;
 
     int i_population_size;
     double d_cross_over_probability;
