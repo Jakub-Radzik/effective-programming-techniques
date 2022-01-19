@@ -5,6 +5,12 @@
 #ifndef MINIPROJECT_CMAX3SATPROBLEM_H
 #define MINIPROJECT_CMAX3SATPROBLEM_H
 
+#define D_CROSS_OVER_PROBABILITY 0.3
+#define D_MUTATION_PROBABILITY 0.5
+#define I_POPULATION_SIZE 100
+#define I_MAX_NUMBER_OF_GENERATIONS 100
+#define I_NUMBER_OF_VARIABLES_IN_SENTENCE 3
+
 #include <vector>
 #include <string>
 #include <fstream>
@@ -20,28 +26,30 @@ class CMax3SatProblem {
 public:
     CMax3SatProblem(std::string fileName);
 
-    int solve();
-
-    void setIPopulationSize(int iPopulationSize);
-
-    void setIMaxNumberOfGenerations(int iMaxNumberOfGenerations);
-
-    void setDCrossOverProbability(double dCrossOverProbability);
-
-    void setDMutationProbability(double dMutationProbability);
-
     ~CMax3SatProblem();
 
+    int iSolve();
+
+    // setters
+    void vSetPopulationSize(int iPopulationSize);
+
+    void vSetMaxNumberOfGenerations(int iMaxNumberOfGenerations);
+
+    void vSetCrossOverProbability(double dCrossOverProbability);
+
+    void vSetMutationProbability(double dMutationProbability);
+
+
 private:
-    void load();
+    void vLoad();
 
-    int compute(CGAIndividual &individual);
+    int iCompute(CGAIndividual &cgaIndividual);
 
-    int isVectorContainsVariable(const int &iVariable);
+    int iPositionOfVariableInVector(const int &iVariable);
 
-    Sentence *parseSentenceIntoTable(std::string sSentence);
+    Sentence *parseStringSentenceIntoObjectSentence(std::string sSentence);
 
-    CGAOptimizer *cgaOptimizer;
+    CGAOptimizer *cga_optimizer;
 
     std::vector<Sentence *> vector_of_sentences;
     std::vector<Node *> vector_of_nodes_variables;

@@ -11,7 +11,9 @@ Node::Node(int iVariable, bool bValue) {
     i_ref_count = 1;
 }
 
-Node::~Node()=default;
+Node::~Node() {
+    std::cout << "Node " << i_variable << " deleted" << std::endl;
+}
 
 const int &Node::getIVariable() const {
     return i_variable;

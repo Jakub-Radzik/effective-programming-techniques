@@ -13,67 +13,82 @@ CGAOptimizer::CGAOptimizer(int populationSize, double mutationProbability, doubl
 }
 
 CGAOptimizer::~CGAOptimizer() {
-    population.clear();
-}
-
-void CGAOptimizer::v_initialize() {
-    std::cout << "Initializing population" << std::endl;
-
-    for (int i = 0; i < i_population_size; i++) {
-        population.push_back(new CGAIndividual(i_genotype_size));
-    }
-
-    for (int i = 0; i < i_population_size; i++) {
-        population[i]->v_randomize();
+    for (int i = 0; i < i_population_size; ++i) {
+        delete v_population[i];
     }
 }
 
-void CGAOptimizer::v_run_iteration() {
-    std::cout << "Running iteration: " << i_iteration_count++ << std::endl;
+void CGAOptimizer::vInitialize() {
+    std::cout << "Initializing v_population" << std::endl;
 
+    for (int i = 0; i < i_population_size; i++) {
+        v_population.push_back(new CGAIndividual(i_genotype_size));
+    }
+
+    for (int i = 0; i < i_population_size; i++) {
+        v_population[i]->vRandomize();
+    }
+}
+
+void CGAOptimizer::vRunIteration() {
     std::vector new_population = std::vector<CGAIndividual *>();
-    CGAIndividual *parent1;
-    CGAIndividual *parent2;
-    CGAIndividual *child1;
-    CGAIndividual *child2;
+    CGAIndividual *cga_parent_1;
+    CGAIndividual *cga_parent_2;
+    CGAIndividual *cga_child_1;
+    CGAIndividual *cga_child_2;
 
     while (new_population.size() < i_population_size) {
-        parent1 = v_select_parent();
+        cga_parent_1 = vSelectParent();
         do {
-            parent2 = v_select_parent();
-        } while (parent1 == parent2);
+            cga_parent_2 = vSelectParent();
+        } while (cga_parent_1 == cga_parent_2);
 
-        std::tie(child1, child2) = v_crossover(*parent1, *parent2);
-        v_mutate(*child1);
-        v_mutate(*child2);
+        std::tie(cga_child_1, cga_child_2) = vCrossover(*cga_parent_1, *cga_parent_2);
+        vMutate(*cga_child_1);
+        vMutate(*cga_child_2);
 
-        new_population.push_back(child1);
-        new_population.push_back(child2);
+        new_population.push_back(cga_child_1);
+        new_population.push_back(cga_child_2);
     }
-    population = std::move(new_population);
 
+    for (int i = 0; i < i_population_size; ++i) {
+        delete v_population[i];
+    }
+
+    v_population = std::move(new_population);
+
+
+    cga_child_1 = nullptr;
+    cga_child_2 = nullptr;
+    cga_parent_1 = nullptr;
+    cga_parent_2 = nullptr;
+
+    delete cga_child_1;
+    delete cga_child_2;
+    delete cga_parent_1;
+    delete cga_parent_2;
 }
 
-CGAIndividual *CGAOptimizer::v_select_parent() {
-    CGAIndividual *possible_parent1 = population[rand() % i_population_size];
+CGAIndividual *CGAOptimizer::vSelectParent() {
+    CGAIndividual *possible_parent1 = v_population[rand() % i_population_size];
     CGAIndividual *possible_parent2;
     do {
-        possible_parent2 = population[rand() % i_population_size];
+        possible_parent2 = v_population[rand() % i_population_size];
     } while (possible_parent1 == possible_parent2);
 
-    if (possible_parent1->fitness() >= possible_parent2->fitness())
+    if (possible_parent1->dFitness() >= possible_parent2->dFitness())
         return possible_parent1;
     return possible_parent2;
 }
 
 std::tuple<CGAIndividual *, CGAIndividual *>
-CGAOptimizer::v_crossover(CGAIndividual &parent1, CGAIndividual &parent2) {
+CGAOptimizer::vCrossover(CGAIndividual &parent1, CGAIndividual &parent2) {
     if (((double) (rand() % 100) / 100) < d_crossover_probability) {
         CGAIndividual *child1 = new CGAIndividual(i_genotype_size);
         CGAIndividual *child2 = new CGAIndividual(i_genotype_size);
 
-        child1->v_crossover(parent1, parent2);
-        child2->v_crossover(parent1, parent2);
+        child1->vCrossover(parent1, parent2);
+        child2->vCrossover(parent1, parent2);
 
         std::tuple<CGAIndividual *, CGAIndividual *> children = std::make_tuple(child1, child2);
 
@@ -88,10 +103,10 @@ CGAOptimizer::v_crossover(CGAIndividual &parent1, CGAIndividual &parent2) {
     return std::make_tuple(new CGAIndividual(parent1), new CGAIndividual(parent2));
 }
 
-void CGAOptimizer::v_mutate(CGAIndividual &individual) {
-    individual.v_mutation(d_mutation_probability);
+void CGAOptimizer::vMutate(CGAIndividual &individual) {
+    individual.vMutation(d_mutation_probability);
 }
 
 const std::vector<CGAIndividual *> &CGAOptimizer::getPopulation() const {
-    return population;
+    return v_population;
 }

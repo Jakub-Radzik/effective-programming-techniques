@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 class CGAIndividual {
 public:
@@ -16,20 +17,20 @@ public:
 
     ~CGAIndividual();
 
-    void v_crossover(CGAIndividual &parent1, CGAIndividual &parent2);
+    void vCrossover(CGAIndividual &parent1, CGAIndividual &parent2);
 
-    void v_mutation(double iMutationProbability);
+    void vMutation(double iMutationProbability);
 
-    double fitness();
+    double dFitness();
 
-    void v_randomize();
+    void vRandomize();
 
     const std::vector<bool> &getGenotype() const;
 
-    void setDFitness(double dFitness);
+    void vSetFitness(double dFitness);
 
 private:
-    std::vector<bool> bv_genotype;
+    std::vector<bool> v_genotype;
     double d_fitness;
     int i_genotype_size;
 };

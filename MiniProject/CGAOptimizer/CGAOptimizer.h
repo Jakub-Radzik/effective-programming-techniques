@@ -16,15 +16,15 @@ public:
 
     ~CGAOptimizer();
 
-    void v_initialize();
+    void vInitialize();
 
-    void v_run_iteration();
+    void vRunIteration();
 
-    CGAIndividual *v_select_parent();
+    CGAIndividual *vSelectParent();
 
-    std::tuple<CGAIndividual *, CGAIndividual *> v_crossover(CGAIndividual &parent1, CGAIndividual &parent2);
+    std::tuple<CGAIndividual *, CGAIndividual *> vCrossover(CGAIndividual &parent1, CGAIndividual &parent2);
 
-    void v_mutate(CGAIndividual &individual);
+    void vMutate(CGAIndividual &individual);
 
     const std::vector<CGAIndividual *> &getPopulation() const;
 
@@ -33,8 +33,7 @@ private:
     double d_crossover_probability;
     double d_mutation_probability;
     int i_genotype_size;
-    int i_iteration_count = 1;
-    std::vector<CGAIndividual *> population;
+    std::vector<CGAIndividual *> v_population;
 };
 
 #endif //MINIPROJECT_CGAOPTIMIZER_H
