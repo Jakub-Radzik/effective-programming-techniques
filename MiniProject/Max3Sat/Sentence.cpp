@@ -2,7 +2,6 @@
 // Created by Jakub Radzik on 21/12/2021.
 //
 
-#include <iostream>
 #include "Sentence.h"
 
 //Flagged Variable
@@ -13,7 +12,6 @@ FlaggedVariable::FlaggedVariable(Node *node, bool bShouldBeNegated) {
 }
 
 FlaggedVariable::~FlaggedVariable() {
-    std::cout << "Deleting FlaggedVariable" << std::endl;
     if (node->getIRefCount() == 1) {
         delete node;
     }
@@ -51,7 +49,6 @@ Sentence::Sentence(int iVariablesCount) {
 }
 
 Sentence::~Sentence() {
-    std::cout << "Deleting Sentence" << std::endl;
     for (FlaggedVariable *flagged_variable: flagged_variables) {
         delete flagged_variable;
     }
