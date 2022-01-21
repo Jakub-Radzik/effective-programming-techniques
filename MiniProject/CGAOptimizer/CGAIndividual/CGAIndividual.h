@@ -21,17 +21,17 @@ public:
 
     void vMutation(double iMutationProbability);
 
-    double dFitness();
+    int iFitness() const;
 
     void vRandomize();
 
     const std::vector<bool> &getGenotype() const;
 
-    void vSetFitness(double dFitness);
+    void vSetFitness(int iFitness);
 
 private:
     std::vector<bool> v_genotype;
-    double d_fitness;
+    int i_fitness;
     int i_genotype_size;
 };
 

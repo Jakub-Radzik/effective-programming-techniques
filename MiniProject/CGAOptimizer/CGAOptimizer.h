@@ -22,9 +22,9 @@ public:
 
     CGAIndividual *vSelectParent();
 
-    std::tuple<CGAIndividual *, CGAIndividual *> vCrossover(CGAIndividual &parent1, CGAIndividual &parent2);
+    std::tuple<CGAIndividual *, CGAIndividual *> tCrossover(CGAIndividual &cgaParent1, CGAIndividual &cgaParent2) const;
 
-    void vMutate(CGAIndividual &individual);
+    void vMutate(CGAIndividual &cgaIndividual) const;
 
     const std::vector<CGAIndividual *> &getPopulation() const;
 

@@ -14,11 +14,11 @@ class FlaggedVariable {
 public:
     FlaggedVariable(Node *node, bool bShouldBeNegated);
     ~FlaggedVariable();
-    void replaceNode(Node *node);
-    bool resolveNode();
+    void vReplaceNode(Node *node);
+    bool bResolveNode();
     Node *getNode() const;
 
-    bool isBShouldBeNegated() const;
+    bool bShouldBeNegated() const;
 
 private:
     Node *node;
@@ -30,16 +30,15 @@ class Sentence {
 public:
     Sentence(int iVariablesCount);
     ~Sentence();
-    void addVariable(Node *node, bool bShouldBeNegated);
-    bool resolveSentence();
-    void replaceNodeAt(int iIndex, Node *node);
-    Node *getNodeAt(int iIndex);
-    int getVariable(int iIndex);
-    bool isVariableNegated(int iIndex);
+    void vAddVariable(Node *node, bool bShouldBeNegated);
+    bool bResolveSentence();
+    void vReplaceNodeAt(int iIndex, Node *node);
+    Node *nGetNodeAt(int iIndex);
+    int iGetVariable(int iIndex);
 
 private:
     int i_variables_count;
-    std::vector<FlaggedVariable *> flagged_variables;
+    std::vector<FlaggedVariable *> v_flagged_variables;
 };
 
 #endif //MINIPROJECT_SENTENCE_H

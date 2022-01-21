@@ -24,7 +24,7 @@
 
 class CMax3SatProblem {
 public:
-    CMax3SatProblem(std::string fileName);
+    explicit CMax3SatProblem(std::string sFileName);
 
     ~CMax3SatProblem();
 
@@ -47,7 +47,7 @@ private:
 
     int iPositionOfVariableInVector(const int &iVariable);
 
-    Sentence *parseStringSentenceIntoObjectSentence(std::string sSentence);
+    Sentence *parseStringSentenceIntoObjectSentence(std::string sSentence) const;
 
     CGAOptimizer *cga_optimizer;
 

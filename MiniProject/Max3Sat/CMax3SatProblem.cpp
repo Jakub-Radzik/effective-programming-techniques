@@ -4,14 +4,17 @@
 
 #include "CMax3SatProblem.h"
 
-CMax3SatProblem::CMax3SatProblem(std::string fileName) {
-    s_file_name = fileName;
+#include <utility>
+
+CMax3SatProblem::CMax3SatProblem(std::string sFileName) {
+    s_file_name = std::move(sFileName);
     i_sentences_count = 0;
     i_variables_count = 0;
     i_max_number_of_fulfilled_sentences = 0;
     i_number_of_variables_in_sentence = I_NUMBER_OF_VARIABLES_IN_SENTENCE;
     vector_of_sentences = std::vector<Sentence *>();
     vector_of_nodes_variables = std::vector<Node *>();
+    cgaIndividual_best_solution = nullptr;
 
     d_cross_over_probability = D_CROSS_OVER_PROBABILITY;
     d_mutation_probability = D_MUTATION_PROBABILITY;
@@ -62,16 +65,16 @@ void CMax3SatProblem::vLoad() {
         for (int j = 0; j < i_number_of_variables_in_sentence; j++) {
 
             // get variable and check whether it exist in vector of variables (sign is not important here)
-            i_variable_in_sentence = vector_of_sentences[i]->getVariable(j);
+            i_variable_in_sentence = vector_of_sentences[i]->iGetVariable(j);
             i_position_of_variable = iPositionOfVariableInVector(i_variable_in_sentence);
 
             // if variable is not present in vector
             if (i_position_of_variable == -1) {
-                vector_of_nodes_variables.push_back(vector_of_sentences[i]->getNodeAt(j));
+                vector_of_nodes_variables.push_back(vector_of_sentences[i]->nGetNodeAt(j));
                 i_variables_count++;
             } else {
                 // flagged variables with the same value should point at the same node
-                vector_of_sentences[i]->replaceNodeAt(j, vector_of_nodes_variables[i_position_of_variable]);
+                vector_of_sentences[i]->vReplaceNodeAt(j, vector_of_nodes_variables[i_position_of_variable]);
             }
         }
     }
@@ -79,7 +82,6 @@ void CMax3SatProblem::vLoad() {
     std::cout << "Contains " << i_variables_count << " variables" << std::endl;
     cga_optimizer = new CGAOptimizer(i_population_size, d_mutation_probability, d_cross_over_probability,
                                      i_variables_count);
-
 }
 
 int CMax3SatProblem::iPositionOfVariableInVector(const int &iVariable) {
@@ -98,19 +100,32 @@ int CMax3SatProblem::iSolve() {
     CGAIndividual *individual;
     cga_optimizer->vInitialize();
 
-    //iterate over k number of populations
+    // iterate over k number of populations
     for (int k = 0; k < i_max_number_of_generations; k++) {
 
-        //iterate over v_population
+        // iterate over v_population
         for (int i = 0; i < i_population_size; i++) {
             individual = cga_optimizer->getPopulation()[i];
 
-            //iterate over member v_genotype
+            // iterate over member v_genotype
             for (int j = 0; j < i_variables_count; ++j) {
+                // set genotype to variables
                 vector_of_nodes_variables[j]->setBValue(individual->getGenotype()[j]);
             }
 
-            iCompute(*individual);
+            // compute fitness of current setting and set it to individual
+            individual->vSetFitness(iCompute(*individual));
+
+            // find max fitness and save copy of best individual
+            if (individual->iFitness() > i_max_number_of_fulfilled_sentences) {
+                i_max_number_of_fulfilled_sentences = individual->iFitness();
+
+                if(cgaIndividual_best_solution != nullptr) {
+                    delete cgaIndividual_best_solution;
+                }
+
+                cgaIndividual_best_solution = new CGAIndividual(*individual);
+            }
         }
         cga_optimizer->vRunIteration();
     }
@@ -118,7 +133,7 @@ int CMax3SatProblem::iSolve() {
     individual = nullptr;
     delete individual;
 
-    std::cout << "Spełniono sentencji: " << i_max_number_of_fulfilled_sentences << std::endl;
+    std::cout << "Spełniono sentencji: " << i_max_number_of_fulfilled_sentences<< " z "<< i_sentences_count << std::endl;
     std::cout << "Jakość: " << 100 * ((float) i_max_number_of_fulfilled_sentences / (float) i_sentences_count) << " %"
               << std::endl;
     for (int i = 0; i < i_variables_count; ++i) {
@@ -132,22 +147,15 @@ int CMax3SatProblem::iSolve() {
 int CMax3SatProblem::iCompute(CGAIndividual &cgaIndividual) {
     int i_temp_number_of_fulfilled_sentences = 0;
     for (int i = 0; i < i_sentences_count; i++) {
-        if (vector_of_sentences[i]->resolveSentence()) {
+        if (vector_of_sentences[i]->bResolveSentence()) {
             i_temp_number_of_fulfilled_sentences++;
         }
-    }
-
-    cgaIndividual.vSetFitness(i_temp_number_of_fulfilled_sentences);
-
-    if (i_temp_number_of_fulfilled_sentences > i_max_number_of_fulfilled_sentences) {
-        i_max_number_of_fulfilled_sentences = i_temp_number_of_fulfilled_sentences;
-        cgaIndividual_best_solution = new CGAIndividual(cgaIndividual);
     }
 
     return i_temp_number_of_fulfilled_sentences;
 }
 
-Sentence *CMax3SatProblem::parseStringSentenceIntoObjectSentence(std::string sSentence) {
+Sentence *CMax3SatProblem::parseStringSentenceIntoObjectSentence(std::string sSentence) const {
     sSentence = sSentence.substr(2, sSentence.length() - 3);// remove parentheses
 
     Sentence *s_sentence = new Sentence(i_number_of_variables_in_sentence);
@@ -163,7 +171,7 @@ Sentence *CMax3SatProblem::parseStringSentenceIntoObjectSentence(std::string sSe
                 bWordIsNegative = word.starts_with("-");
                 value = bWordIsNegative ? word.substr(1, word.length()) : word;
                 std::istringstream(value) >> i_variable;
-                s_sentence->addVariable(new Node(i_variable, false), bWordIsNegative);
+                s_sentence->vAddVariable(new Node(i_variable, false), bWordIsNegative);
             }
             word = "";
         } else {

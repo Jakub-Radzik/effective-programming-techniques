@@ -7,11 +7,13 @@
 CGAIndividual::CGAIndividual(int iGenotypeSize) {
     i_genotype_size = iGenotypeSize;
     v_genotype = std::vector<bool>(iGenotypeSize);
+    i_fitness = 0;
 }
 
 CGAIndividual::CGAIndividual(CGAIndividual &other) {
     i_genotype_size = other.i_genotype_size;
     v_genotype = other.v_genotype;
+    i_fitness = other.i_fitness;
 }
 
 CGAIndividual::~CGAIndividual() {
@@ -28,12 +30,12 @@ void CGAIndividual::vCrossover(CGAIndividual &parent1, CGAIndividual &parent2) {
     }
 }
 
-double CGAIndividual::dFitness() {
-    return d_fitness;
+int CGAIndividual::iFitness() const {
+    return i_fitness;
 }
 
-void CGAIndividual::vSetFitness(double dFitness) {
-    d_fitness = dFitness;
+void CGAIndividual::vSetFitness(int iFitness) {
+    i_fitness = iFitness;
 }
 
 void CGAIndividual::vMutation(double iMutationProbability) {
