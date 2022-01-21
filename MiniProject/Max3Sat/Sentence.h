@@ -18,8 +18,6 @@ public:
     bool bResolveNode();
     Node *getNode() const;
 
-    bool bShouldBeNegated() const;
-
 private:
     Node *node;
     bool b_should_be_negated;

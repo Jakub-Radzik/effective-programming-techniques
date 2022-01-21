@@ -13,30 +13,30 @@ Node::Node(int iVariable, bool bValue) {
 
 Node::~Node() = default;
 
-const int &Node::getIVariable() const {
+const int &Node::iGetVariable() const {
     return i_variable;
 }
 
-void Node::setIVariable(const int &iVariable) {
+void Node::vSetVariable(const int &iVariable) {
     i_variable = iVariable;
 }
 
-bool Node::isBValue() const {
+bool Node::bGetValue() const {
     return b_value;
 }
 
-void Node::setBValue(bool bValue) {
+void Node::vSetValue(bool bValue) {
     b_value = bValue;
 }
 
-void Node::incrementRefCount() {
+void Node::vIncrementRefCount() {
     i_ref_count++;
 }
 
-void Node::decrementRefCount() {
+void Node::vDecrementRefCount() {
     i_ref_count--;
 }
 
-int Node::getIRefCount() const {
+int Node::iGetRefCount() const {
     return i_ref_count;
 }

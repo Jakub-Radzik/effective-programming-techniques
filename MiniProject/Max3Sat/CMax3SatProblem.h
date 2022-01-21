@@ -16,8 +16,6 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <map>
-#include <math.h>
 #include "Node.h"
 #include "Sentence.h"
 #include "../CGAOptimizer/CGAOptimizer.h"

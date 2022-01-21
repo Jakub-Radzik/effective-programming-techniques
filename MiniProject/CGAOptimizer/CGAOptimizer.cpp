@@ -4,12 +4,10 @@
 
 #include "CGAOptimizer.h"
 
-CGAOptimizer::CGAOptimizer(int populationSize, double mutationProbability, double crossoverProbability,
-                           int iGenotypeSize) {
+CGAOptimizer::CGAOptimizer(int populationSize, double mutationProbability, double crossoverProbability) {
     i_population_size = populationSize;
     d_mutation_probability = mutationProbability;
     d_crossover_probability = crossoverProbability;
-    i_genotype_size = iGenotypeSize;
 }
 
 CGAOptimizer::~CGAOptimizer() {
@@ -18,7 +16,8 @@ CGAOptimizer::~CGAOptimizer() {
     }
 }
 
-void CGAOptimizer::vInitialize() {
+void CGAOptimizer::vInitialize(int iGenotypeSize) {
+    i_genotype_size = iGenotypeSize;
     std::cout << "Initializing v_population" << std::endl;
 
     for (int i = 0; i < i_population_size; i++) {
@@ -31,13 +30,13 @@ void CGAOptimizer::vInitialize() {
 }
 
 void CGAOptimizer::vRunIteration() {
-    std::vector new_population = std::vector<CGAIndividual *>();
+    std::vector v_new_population = std::vector<CGAIndividual *>();
     CGAIndividual *cga_parent_1;
     CGAIndividual *cga_parent_2;
     CGAIndividual *cga_child_1;
     CGAIndividual *cga_child_2;
 
-    while (new_population.size() < i_population_size) {
+    while (v_new_population.size() < i_population_size) {
         cga_parent_1 = vSelectParent();
         do {
             cga_parent_2 = vSelectParent();
@@ -47,15 +46,15 @@ void CGAOptimizer::vRunIteration() {
         vMutate(*cga_child_1);
         vMutate(*cga_child_2);
 
-        new_population.push_back(cga_child_1);
-        new_population.push_back(cga_child_2);
+        v_new_population.push_back(cga_child_1);
+        v_new_population.push_back(cga_child_2);
     }
 
     for (int i = 0; i < i_population_size; ++i) {
         delete v_population[i];
     }
 
-    v_population = std::move(new_population);
+    v_population = std::move(v_new_population);
 
 
     cga_child_1 = nullptr;

@@ -12,17 +12,17 @@ public:
     Node(int iVariable, bool bValue);
     ~Node();
 
-    const int &getIVariable() const;
+    const int &iGetVariable() const;
 
-    void setIVariable(const int &iVariable);
+    void vSetVariable(const int &iVariable);
 
-    bool isBValue() const;
+    bool bGetValue() const;
 
-    void setBValue(bool bValue);
+    void vSetValue(bool bValue);
 
-    void incrementRefCount();
-    void decrementRefCount();
-    int getIRefCount() const;
+    void vIncrementRefCount();
+    void vDecrementRefCount();
+    int iGetRefCount() const;
 
 private:
     int i_variable;

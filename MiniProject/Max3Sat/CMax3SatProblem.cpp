@@ -20,6 +20,8 @@ CMax3SatProblem::CMax3SatProblem(std::string sFileName) {
     d_mutation_probability = D_MUTATION_PROBABILITY;
     i_population_size = I_POPULATION_SIZE;
     i_max_number_of_generations = I_MAX_NUMBER_OF_GENERATIONS;
+
+    cga_optimizer = new CGAOptimizer(i_population_size, d_mutation_probability, d_cross_over_probability);
 }
 
 CMax3SatProblem::~CMax3SatProblem() {
@@ -80,13 +82,11 @@ void CMax3SatProblem::vLoad() {
     }
 
     std::cout << "Contains " << i_variables_count << " variables" << std::endl;
-    cga_optimizer = new CGAOptimizer(i_population_size, d_mutation_probability, d_cross_over_probability,
-                                     i_variables_count);
 }
 
 int CMax3SatProblem::iPositionOfVariableInVector(const int &iVariable) {
     for (int i = 0; i < i_variables_count; i++) {
-        if (vector_of_nodes_variables[i]->getIVariable() == iVariable) {
+        if (vector_of_nodes_variables[i]->iGetVariable() == iVariable) {
             return i;
         }
     }
@@ -98,7 +98,7 @@ int CMax3SatProblem::iSolve() {
     vLoad();
 
     CGAIndividual *individual;
-    cga_optimizer->vInitialize();
+    cga_optimizer->vInitialize(i_variables_count);
 
     // iterate over k number of populations
     for (int k = 0; k < i_max_number_of_generations; k++) {
@@ -110,7 +110,7 @@ int CMax3SatProblem::iSolve() {
             // iterate over member v_genotype
             for (int j = 0; j < i_variables_count; ++j) {
                 // set genotype to variables
-                vector_of_nodes_variables[j]->setBValue(individual->getGenotype()[j]);
+                vector_of_nodes_variables[j]->vSetValue(individual->getGenotype()[j]);
             }
 
             // compute fitness of current setting and set it to individual
@@ -137,7 +137,7 @@ int CMax3SatProblem::iSolve() {
     std::cout << "Jakość: " << 100 * ((float) i_max_number_of_fulfilled_sentences / (float) i_sentences_count) << " %"
               << std::endl;
     for (int i = 0; i < i_variables_count; ++i) {
-        std::cout << "[" << vector_of_nodes_variables[i]->getIVariable() << "=" << cgaIndividual_best_solution->getGenotype()[i] << "] ";
+        std::cout << "[" << vector_of_nodes_variables[i]->iGetVariable() << "=" << cgaIndividual_best_solution->getGenotype()[i] << "] ";
     }
     std::cout<<std::endl;
 

@@ -12,11 +12,11 @@
 
 class CGAOptimizer {
 public:
-    CGAOptimizer(int populationSize, double mutationProbability, double crossoverProbability, int iGenotypeSize);
+    CGAOptimizer(int populationSize, double mutationProbability, double crossoverProbability);
 
     ~CGAOptimizer();
 
-    void vInitialize();
+    void vInitialize(int iGenotype);
 
     void vRunIteration();
 

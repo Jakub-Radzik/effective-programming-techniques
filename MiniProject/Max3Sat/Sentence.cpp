@@ -12,33 +12,29 @@ FlaggedVariable::FlaggedVariable(Node *node, bool bShouldBeNegated) {
 }
 
 FlaggedVariable::~FlaggedVariable() {
-    if (node->getIRefCount() == 1) {
+    if (node->iGetRefCount() == 1) {
         delete node;
     }
-    node->decrementRefCount();
+    node->vDecrementRefCount();
 }
 
 bool FlaggedVariable::bResolveNode() {
-    return b_should_be_negated ? !this->node->isBValue() : this->node->isBValue();
+    return b_should_be_negated ? !this->node->bGetValue() : this->node->bGetValue();
 }
 
 void FlaggedVariable::vReplaceNode(Node *node) {
-    if(this->node->getIRefCount() == 1) {
+    if(this->node->iGetRefCount() == 1) {
         delete this->node;
     }else{
-        this->node->decrementRefCount();
+        this->node->vDecrementRefCount();
     }
 
-    node->incrementRefCount();
+    node->vIncrementRefCount();
     this->node = node;
 }
 
 Node *FlaggedVariable::getNode() const {
     return node;
-}
-
-bool FlaggedVariable::bShouldBeNegated() const {
-    return b_should_be_negated;
 }
 
 //Sentence
@@ -68,7 +64,7 @@ bool Sentence::bResolveSentence() {
 }
 
 int Sentence::iGetVariable(int iIndex) {
-    return v_flagged_variables[iIndex]->getNode()->getIVariable();
+    return v_flagged_variables[iIndex]->getNode()->iGetVariable();
 }
 
 void Sentence::vReplaceNodeAt(int iIndex, Node *node) {
