@@ -29,10 +29,6 @@ CMax3SatProblem::~CMax3SatProblem() {
 
     delete cga_optimizer;
 
-    for (int i = 0; i < i_variables_count; ++i) {
-        delete vector_of_nodes_variables[i];
-    }
-
     for (int i = 0; i < i_sentences_count; i++) {
         delete vector_of_sentences[i];
     }
@@ -81,6 +77,10 @@ void CMax3SatProblem::vLoad() {
         }
     }
 
+    for (int i = 0; i < i_variables_count; ++i) {
+        vector_of_nodes_variables[i]->setIIndex(i);
+    }
+
     std::cout << "Contains " << i_variables_count << " variables" << std::endl;
 }
 
@@ -102,10 +102,14 @@ int CMax3SatProblem::iSolve() {
 
     // iterate over k number of populations
     for (int k = 0; k < i_max_number_of_generations; k++) {
-
+        cga_optimizer->vRunIteration();
         // iterate over v_population
         for (int i = 0; i < i_population_size; i++) {
             individual = cga_optimizer->getPopulation()[i];
+
+            // modyfication - optimize single sentence
+            individual->setSRandomSentence(sGetRandomSentence());
+            individual->vOptimizeGenotype();
 
             // iterate over member v_genotype
             for (int j = 0; j < i_variables_count; ++j) {
@@ -127,7 +131,6 @@ int CMax3SatProblem::iSolve() {
                 cgaIndividual_best_solution = new CGAIndividual(*individual);
             }
         }
-        cga_optimizer->vRunIteration();
     }
 
     individual = nullptr;
@@ -196,5 +199,9 @@ void CMax3SatProblem::vSetMutationProbability(double dMutationProbability) {
 
 void CMax3SatProblem::vSetMaxNumberOfGenerations(int iMaxNumberOfGenerations) {
     i_max_number_of_generations = iMaxNumberOfGenerations;
+}
+
+Sentence *CMax3SatProblem::sGetRandomSentence() {
+    return vector_of_sentences[rand() % i_sentences_count];
 }
 

@@ -18,7 +18,7 @@ CGAOptimizer::~CGAOptimizer() {
 
 void CGAOptimizer::vInitialize(int iGenotypeSize) {
     i_genotype_size = iGenotypeSize;
-    std::cout << "Initializing v_population" << std::endl;
+    std::cout << "Initializing population" << std::endl;
 
     for (int i = 0; i < i_population_size; i++) {
         v_population.push_back(new CGAIndividual(i_genotype_size));

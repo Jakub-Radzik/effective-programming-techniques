@@ -56,3 +56,23 @@ void CGAIndividual::vRandomize() {
 const std::vector<bool> &CGAIndividual::getGenotype() const {
     return v_genotype;
 }
+
+Sentence *CGAIndividual::getSRandomSentence() const {
+    return s_random_sentence;
+}
+
+void CGAIndividual::setSRandomSentence(Sentence *sRandomSentence) {
+    s_random_sentence = sRandomSentence;
+}
+
+void CGAIndividual::vOptimizeGenotype() {
+    bool isSentenceTrue = s_random_sentence->bResolveSentence();
+
+    int i_index;
+    if(!isSentenceTrue) {
+        for (int i = 0; i < s_random_sentence->getIVariablesCount(); ++i) {
+            i_index = s_random_sentence->iGetIndex(i);
+            v_genotype[i_index] = !v_genotype[i_index];
+        }
+    }
+}

@@ -24,8 +24,12 @@ public:
     void vDecrementRefCount();
     int iGetRefCount() const;
 
+    int getIIndex() const;
+    void setIIndex(int iIndex);
+
 private:
     int i_variable;
+    int i_index;
     int i_ref_count;
     bool b_value;
 };

@@ -14,8 +14,9 @@ FlaggedVariable::FlaggedVariable(Node *node, bool bShouldBeNegated) {
 FlaggedVariable::~FlaggedVariable() {
     if (node->iGetRefCount() == 1) {
         delete node;
+    }else{
+        node->vDecrementRefCount();
     }
-    node->vDecrementRefCount();
 }
 
 bool FlaggedVariable::bResolveNode() {
@@ -73,5 +74,13 @@ void Sentence::vReplaceNodeAt(int iIndex, Node *node) {
 
 Node *Sentence::nGetNodeAt(int iIndex) {
     return v_flagged_variables[iIndex]->getNode();
+}
+
+int Sentence::getIVariablesCount() const {
+    return i_variables_count;
+}
+
+int Sentence::iGetIndex(int iIndex) {
+    return v_flagged_variables[iIndex]->getNode()->getIIndex();
 }
 

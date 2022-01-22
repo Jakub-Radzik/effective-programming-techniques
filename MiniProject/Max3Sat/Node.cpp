@@ -40,3 +40,11 @@ void Node::vDecrementRefCount() {
 int Node::iGetRefCount() const {
     return i_ref_count;
 }
+
+int Node::getIIndex() const {
+    return i_index;
+}
+
+void Node::setIIndex(int iIndex) {
+    i_index = iIndex;
+}

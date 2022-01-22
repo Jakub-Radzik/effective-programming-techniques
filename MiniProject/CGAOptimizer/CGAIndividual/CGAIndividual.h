@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "../../Max3Sat/Sentence.h"
 
 class CGAIndividual {
 public:
@@ -29,10 +30,18 @@ public:
 
     void vSetFitness(int iFitness);
 
+    // modyfikacja
+    Sentence *getSRandomSentence() const;
+
+    void setSRandomSentence(Sentence *sRandomSentence);
+
+    void vOptimizeGenotype();
+
 private:
     std::vector<bool> v_genotype;
     int i_fitness;
     int i_genotype_size;
+    Sentence *s_random_sentence;
 };
 
 

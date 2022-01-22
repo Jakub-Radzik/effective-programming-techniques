@@ -9,8 +9,8 @@
 
 void Max3Sat() {
     CMax3SatProblem problem("m3s_50_1.txt");
-    problem.vSetCrossOverProbability(0.5);
-    problem.vSetMutationProbability(0.5);
+    problem.vSetCrossOverProbability(0.2);
+    problem.vSetMutationProbability(0.3);
     problem.vSetMaxNumberOfGenerations(1000);
     problem.vSetPopulationSize(100);
     problem.iSolve();

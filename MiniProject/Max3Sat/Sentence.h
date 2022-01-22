@@ -18,6 +18,7 @@ public:
     bool bResolveNode();
     Node *getNode() const;
 
+
 private:
     Node *node;
     bool b_should_be_negated;
@@ -33,6 +34,9 @@ public:
     void vReplaceNodeAt(int iIndex, Node *node);
     Node *nGetNodeAt(int iIndex);
     int iGetVariable(int iIndex);
+    int iGetIndex(int iIndex);
+
+    int getIVariablesCount() const;
 
 private:
     int i_variables_count;

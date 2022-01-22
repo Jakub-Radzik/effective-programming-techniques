@@ -45,6 +45,8 @@ private:
 
     int iPositionOfVariableInVector(const int &iVariable);
 
+    Sentence *sGetRandomSentence();
+
     Sentence *parseStringSentenceIntoObjectSentence(std::string sSentence) const;
 
     CGAOptimizer *cga_optimizer;
