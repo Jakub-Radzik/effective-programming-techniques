@@ -36,3 +36,6 @@
 
 # Cmake
 *debug
+
+.idea
+./.idea
